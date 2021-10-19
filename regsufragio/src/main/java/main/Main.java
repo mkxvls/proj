@@ -12,7 +12,7 @@ public class Main {
     
     public static void main(String[] args) throws IOException{
         System.out.println("hola mundo!");
-        new Prueba();
+        new Control();
     }
    
 }
