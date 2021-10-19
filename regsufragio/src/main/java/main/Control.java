@@ -3,7 +3,6 @@ package main;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -26,14 +25,13 @@ public class Control {
         init();
     }
    
-    private void init(){
+    private void init() throws IOException{
         Opcion op = null;
         boolean flag = true;
         Consola consola = new Consola();
         String input="";
         while(flag){
-            consola.menu();
-            op = consola.getOpcion();
+            op = consola.menu();
             input = consola.getInput();
             switch(op){
                 case AGREGAR :break;

@@ -4,7 +4,7 @@ package modelo;
  * Persona abstracta
  * @author Maximiliano Valencia Saez
  */
-public abstract class Persona  {
+public abstract class Persona implements Coordenable {
     private String rut;
     private String Nombres;
     private String Apellidos;

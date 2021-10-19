@@ -1,0 +1,144 @@
+{
+  "Sedes" : [
+      {
+        "Nombre" : "Pucv",
+        "Direccion" : "2950 Brasil,Valparaiso" ,
+        "Mesas" : [
+          {
+            "numero" : 1 ,
+            "Personas" : [
+              {
+                "Nombres" : "Pedro Juan" ,
+                "Apellidos" : "Soto Perez" ,
+                "Rut" : "11.111.111-1" ,
+                "Direccion" : "Condell 1546, Valparaíso",
+                "vocal" : "SI"
+              },{
+                "Nombres" : "Juan Pedro" ,
+                "Apellidos" : "Perez Soto" ,
+                "Rut" : "11.211.111-1" ,
+                "Direccion" : "Labruyere 284, Valparaíso",
+                "vocal" : "NO"
+              }
+            ]
+          },{
+            "numero" : 2 ,
+            "Personas" : [
+              {
+                "Nombres" : "Cosme" ,
+                "Apellidos" : "Fulanito" ,
+                "Rut" : "12.111.111-1" ,
+                "Direccion" : "Alba 107, Valparaíso",
+                "vocal" : "SI"
+              },{
+                "Nombres" : "Felipe" ,
+                "Apellidos" : "Sanchez" ,
+                "Rut" : "12.211.111-1" ,
+                "Direccion" : "El Vergel 203, Valparaíso",
+                "vocal" : "AUSENCIA"
+              },{
+                "Nombres" : "Gustavo" ,
+                "Apellidos" : "Sanchez" ,
+                "Rut" : "12.311.111-1" ,
+                "Direccion" : "El Vergel 203, Valparaíso",
+                "vocal" : "NO"
+              }
+            ]
+          }
+        ]
+      },{
+        "Nombre" : "LICEO JUANA ROSS DE EDWARDS",
+        "Direccion" : "871 Argentina,Valparaiso",
+        "Mesas" : [
+          {
+            "numero" : 1 ,
+            "Personas" : [
+              {
+                "Nombres" : "Rick" ,
+                "Apellidos" : "Perez" ,
+                "Rut" : "21.111.111-1" ,
+                "Direccion" : "Carlos Rogers 1080, Valparaíso",
+                "vocal" : "SI"
+              },{
+                "Nombres" : "Paola" ,
+                "Apellidos" : "Soto" ,
+                "Rut" : "22.211.111-1" ,
+                "Direccion" : "Los Chonos 115, Valparaíso",
+                "vocal" : "NO"
+              }
+            ]
+          },{
+            "numero" : 2 ,
+            "Personas" : [
+              {
+                "Nombres" : "Leo" ,
+                "Apellidos" : "Fulanito" ,
+                "Rut" : "22.111.111-1" ,
+                "Direccion" : "Los Chonos 115, Valparaíso",
+                "vocal" : "SI"
+              },{
+                "Nombres" : "Ana" ,
+                "Apellidos" : "Sanchez" ,
+                "Rut" : "22.211.111-1" ,
+                "Direccion" : "Los Chonos 115, Valparaíso",
+                "vocal" : "AUSENCIA"
+              },{
+                "Nombres" : "Daniela" ,
+                "Apellidos" : "Sanchez" ,
+                "Rut" : "22.311.111-1" ,
+                "Direccion" : "El Vergel 203, Valparaíso",
+                "vocal" : "NO"
+              }
+            ]
+          }
+        ]
+
+      },{
+        "Nombre" : "LICEO TECNOLOGICO VILLA ALEMANA",
+        "Direccion" : "133 Valparaiso,Villa Alemana",
+        "Mesas" : [
+          {
+            "numero" : 1 ,
+            "Personas" : [
+              {
+                "Nombres" : "Carlos" ,
+                "Apellidos" : "Perez" ,
+                "Rut" : "21.111.111-1" ,
+                "Direccion" : "Tercera 23, Villa Alemana, Valparaíso",
+                "vocal" : "SI"
+              },{
+                "Nombres" : "Paola" ,
+                "Apellidos" : "Soto" ,
+                "Rut" : "22.211.111-1" ,
+                "Direccion" : "Los Chonos 115, Valparaíso",
+                "vocal" : "NO"
+              }
+            ]
+          },{
+            "numero" : 2 ,
+            "Personas" : [
+              {
+                "Nombres" : "Gonzalo" ,
+                "Apellidos" : "Fulanito" ,
+                "Rut" : "22.111.111-1" ,
+                "Direccion" : "Almte. Latorre 360, Villa Alemana",
+                "vocal" : "SI"
+              },{
+                "Nombres" : "Karen" ,
+                "Apellidos" : "Sanchez" ,
+                "Rut" : "22.211.111-1" ,
+                "Direccion" : "Tercera 23, Villa Alemana",
+                "vocal" : "AUSENCIA"
+              },{
+                "Nombres" : "Rachel" ,
+                "Apellidos" : "Sanchez" ,
+                "Rut" : "22.311.111-1" ,
+                "Direccion" : "Almte. Latorre 360, Villa Alemana",
+                "vocal" : "NO"
+              }
+            ]
+          }
+        ]
+      }
+  ]
+}

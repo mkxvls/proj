@@ -1,18 +1,47 @@
 package main;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 /**
  * interaccion con consola
  * @author Maximiliano Valencia Saez
  */
 public class Consola {
-    private Opcion opcion;
-    private String input="";
+    private String input;
+    private BufferedReader lector;
+    
     
     public Consola(){
+        this.lector = new BufferedReader(new InputStreamReader(System.in));
+        this.input = "";
+        ayuda();
         
     }
 
-    public void menu() {
+    public Opcion menu() throws IOException {
+        boolean flag = true;
+        String opcion;
+        
+        while(flag){
+            textoPrimerMenu();
+            opcion = lector.readLine();
+            switch(opcion){
+                case"1" : agregar() ; break;
+                
+            }
+        }
+        return Opcion.SKIP;
+    }
+    
+    private void agregar() {
+        System.out.println("***MENU AGREGAR***");
+        System.out.println("1.- distrito");
+        System.out.println("2.- ");
+    }
+    
+    private void textoPrimerMenu(){
         System.out.println("***********MENU CONSOLA***********");
         System.out.println("1.-agregar");
         System.out.println("2.-mostrar");
@@ -24,16 +53,12 @@ public class Consola {
         System.out.println("8.-ventana");
         System.out.println("9.-seleccionar por criterio");
         System.out.println("10.-subconjunto filtrado por criterio");
+    };
+    
+    private void ayuda(){
+        System.out.println("manejo por consola\nIngrese con \"enter\"el numero de las opciones para seleccionar");
     }
-
-    public Opcion getOpcion() {
-        return opcion;
-    }
-
-    public void setOpcion(Opcion opcion) {
-        this.opcion = opcion;
-    }
-
+    
     public String getInput() {
         return input;
     }
@@ -41,5 +66,5 @@ public class Consola {
     public void setInput(String input) {
         this.input = input;
     }
-    
+
 }

@@ -8,6 +8,8 @@ public class Direccion  {
     private String numero;
     private String calle;
     private String ciudad;
+    private double lat; //latitud
+    private double lng; //longitud
     
     public Direccion(String numero,String calle,String ciudad){
         this.numero=numero;
@@ -37,6 +39,22 @@ public class Direccion  {
 
     public void setCiudad(String ciudad) {
         this.ciudad = ciudad;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public double getLng() {
+        return lng;
+    }
+
+    public void setLng(double lng) {
+        this.lng = lng;
     }
     
     
