@@ -4,7 +4,8 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /**
- *  clase para el distrito coleccion de Sedes
+ *  clase para el distrito , la coleccion de sedes y personas
+ * 
  * @author Maximiliano Valencia Saez
  */
 public class Distrito {
@@ -53,8 +54,5 @@ public class Distrito {
     public void setSedes(Map<Sede, String> sedes) {
         this.sedes = sedes;
     }
-    
-    
-    
     
 }

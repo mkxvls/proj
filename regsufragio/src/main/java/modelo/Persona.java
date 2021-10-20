@@ -20,8 +20,7 @@ public abstract class Persona implements Coordenable {
      * @return booleano de si es vocal
      */
     public abstract boolean esVocal();
-    
-    
+   
     public String getRut() {
         return rut;
     }
