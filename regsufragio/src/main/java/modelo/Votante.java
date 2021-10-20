@@ -1,26 +1,24 @@
 package modelo;
 
 /**
- * Persona abstracta
+ * Votante abstracta
  * @author Maximiliano Valencia Saez
  */
-public abstract class Persona implements Coordenable {
+public abstract class Votante implements Coordenable {
     private String rut;
     private String Nombres;
     private String Apellidos;
     private String idMesa;
     private Direccion direccion;
     
-    public Persona(){
+    public Votante(){
         
     }
     
-    /**
-     *
-     * @return booleano de si es vocal
-     */
-    public abstract boolean esVocal();
-   
+    public abstract String getTipo();
+    
+    
+    
     public String getRut() {
         return rut;
     }
@@ -52,5 +50,14 @@ public abstract class Persona implements Coordenable {
     public void setIdMesa(String idMesa) {
         this.idMesa = idMesa;
     }
+
+    public Direccion getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(Direccion direccion) {
+        this.direccion = direccion;
+    }
+    
     
 }

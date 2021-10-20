@@ -1,10 +1,9 @@
 package modelo;
 
 /**
- *
- * @author Maximiliano Valencia Saez
+ * * @author Maximiliano Valencia Saez
  */
-public class Direccion  {
+public class Direccion implements Coordenable{
     private String numero;
     private String calle;
     private String ciudad;
@@ -17,6 +16,10 @@ public class Direccion  {
         this.ciudad=ciudad;
     }
 
+    Direccion() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
     public String getNumero() {
         return numero;
     }
@@ -56,6 +59,15 @@ public class Direccion  {
     public void setLng(double lng) {
         this.lng = lng;
     }
+
+    @Override
+    public Double[] getCoords() {
+        return null;
+    }
+
+    @Override
+    public void setCoords() {
     
+    }
     
 }

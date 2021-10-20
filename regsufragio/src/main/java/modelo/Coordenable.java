@@ -6,4 +6,5 @@ package modelo;
  */
 public interface Coordenable {
     public Double[] getCoords();
+    public void setCoords();
 }
