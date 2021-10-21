@@ -30,6 +30,7 @@ public class Consola {
             textoPrimerMenu();
             opcion = lector.readLine();
             switch(opcion){
+                case"0" : return Opcion.SALIR;
                 case"1":
                         switch(agregar()){
                             case 1 : return Opcion.AGREGARSEDE;
@@ -96,6 +97,7 @@ public class Consola {
         System.out.println("8.-ventana");
         System.out.println("9.-seleccionar por criterio");
         System.out.println("10.-subconjunto filtrado por criterio");
+        System.out.println("0.- Salir");
     };
     
     

@@ -1,7 +1,8 @@
 package main;
 
-
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
@@ -9,7 +10,6 @@ import java.net.URL;
 import java.net.URLConnection;
 import modelo.Direccion;
 import modelo.Distrito;
-
 import org.json.*;
 
 /**
@@ -26,10 +26,48 @@ public class Control {
         //pruebita();
         this.distrito = distrito;
         cargar(this.distrito);
-        //run();
+        run();
     }
    
-    
+    private void cargar(Distrito distrito) throws FileNotFoundException, IOException{
+        System.out.println("TESTING");
+        try (BufferedReader lector = new BufferedReader(new FileReader("datos.json"))) {
+            String linea = "";
+            String datos = "";
+            
+            while( (linea = lector.readLine())!=null ){
+                datos=datos+linea;
+            }
+            JSONObject job = new JSONObject(datos);
+            JSONArray jarr = job.getJSONArray("Sedes");
+             
+            datos = "";
+            String nombreSede;
+            String direccionSede;
+            int numeroMesa;
+            for(Object o : jarr){
+    System.out.println("Sede:");
+                JSONObject jobi = (JSONObject) o;
+                nombreSede = jobi.getString("Nombre");
+    System.out.println(nombreSede);
+                direccionSede = jobi.getString("Direccion");
+    System.out.println(direccionSede);
+                JSONArray jarrMesas = jobi.getJSONArray("Mesas");
+    System.out.println(jarrMesas.toString());
+                for(Object oMesa : jarrMesas){
+                    JSONObject mesa = (JSONObject) oMesa;
+                    numeroMesa = mesa.getInt("numero");
+                    System.out.println(mesa.toString());
+                    JSONArray jarrVotantes = mesa.getJSONArray("Personas");
+                    for (Object oPersona : jarrVotantes){
+                        JSONObject persona = (JSONObject) oPersona;
+                        System.out.println(persona.toString());
+                    }
+                        
+                }
+            }   
+        }
+    }
     private void run() throws IOException{
         Opcion op = null;
         boolean flag = true;
@@ -37,6 +75,8 @@ public class Control {
         
         String input="";
         while(flag){
+            input ="";
+            consola.setOutput("");
             op = consola.menu();
             input = consola.getInput();
             switch(op){
@@ -52,14 +92,14 @@ public class Control {
                 case MOSTRARSEDES:
                     consola.setOutput(this.distrito.mostrarSedes());
                     break;
-                case MOSTRARSEDESYPERSONAS: break;
+                case MOSTRARSEDESYPERSONAS:
+                    consola.setOutput(this.distrito.mostrarSedesYPersonas());
+                    break;
                 case SALIR: flag = false; break;
                 default:
                     
             }
-            input ="";
-        }
-            
+        }  
     }
     
     public void pruebita() throws MalformedURLException, IOException{
