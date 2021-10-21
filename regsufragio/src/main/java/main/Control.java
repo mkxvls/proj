@@ -22,17 +22,13 @@ public class Control {
     
     private Distrito distrito;
     
-    public Control() throws IOException{
+    public Control(Distrito distrito) throws IOException{
         //pruebita();
-        this.distrito = new Distrito();
+        this.distrito = distrito;
         cargar(this.distrito);
-        run();
-        
+        //run();
     }
    
-    private void cargar(Distrito distrito){
-        //TODO
-    }
     
     private void run() throws IOException{
         Opcion op = null;
@@ -44,16 +40,24 @@ public class Control {
             op = consola.menu();
             input = consola.getInput();
             switch(op){
-                case AGREGARSEDE: break;
-                case AGREGARMESA: break;
-                case AGREGARPERSONA: break;
-                case MOSTRARSEDES: break;
+                case AGREGARSEDE:
+                    this.distrito.agregarSede(input);
+                    break;
+                case AGREGARMESA:
+                    this.distrito.agregarMesa(input);
+                    break;
+                case AGREGARPERSONA:
+                    this.distrito.agregarMesa(input);
+                    break;
+                case MOSTRARSEDES:
+                    consola.setOutput(this.distrito.mostrarSedes());
+                    break;
                 case MOSTRARSEDESYPERSONAS: break;
                 case SALIR: flag = false; break;
                 default:
                     
             }
-        
+            input ="";
         }
             
     }

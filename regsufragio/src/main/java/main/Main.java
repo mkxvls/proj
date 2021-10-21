@@ -2,7 +2,7 @@
 package main;
 
 import java.io.IOException;
-import modelo.Direccion;
+import modelo.Distrito;
 
 /**
  *  Clase integradora
@@ -12,7 +12,7 @@ public class Main {
     
     public static void main(String[] args) throws IOException{
         System.out.println("hola mundo!");
-        new Control();
+        new Control(new Distrito());
     }
    
 }
