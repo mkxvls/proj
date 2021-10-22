@@ -10,8 +10,8 @@ import java.util.TreeMap;
  */
 public class Distrito {
     private String numero;
-    private Map<Votante,String> personasxRut;
-    private Map<Votante,String> personasxSede;
+    private Map<Persona,String> personasxRut;
+    private Map<Persona,String> personasxSede;
     private Map<Sede,String> sedes;
     
     public Distrito(){
@@ -26,19 +26,19 @@ public class Distrito {
     public void setNumero(String numero) {
         this.numero = numero;
     }
-    public Map<Votante, String> getPersonasxRut() {
+    public Map<Persona, String> getPersonasxRut() {
         return personasxRut;
     }
 
-    public void setPersonasxRut(Map<Votante, String> personasxRut) {
+    public void setPersonasxRut(Map<Persona, String> personasxRut) {
         this.personasxRut = personasxRut;
     }
 
-    public Map<Votante, String> getPersonasxSede() {
+    public Map<Persona, String> getPersonasxSede() {
         return personasxSede;
     }
 
-    public void setPersonasxSede(Map<Votante, String> personaxSede) {
+    public void setPersonasxSede(Map<Persona, String> personaxSede) {
         this.personasxSede = personaxSede;
     }
 
@@ -63,6 +63,14 @@ public class Distrito {
     }
 
     public String mostrarSedesYPersonas() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void agregarSede(Sede sede) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void agregarPersona(Persona votante) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

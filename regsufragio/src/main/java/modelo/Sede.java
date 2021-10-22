@@ -11,7 +11,7 @@ import java.util.TreeMap;
  */
 public class Sede implements Coordenable{
     private Direccion direccion;
-    private Map<Votante,String> votantesxrut;
+    private Map<Persona,String> votantesxrut;
     private List<Mesa> mesas;
     
     public Sede(){
@@ -26,6 +26,10 @@ public class Sede implements Coordenable{
         
     }
 
+    public Sede(String nombreSede, String direccionSede) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public Direccion getDireccion() {
         return direccion;
     }
@@ -34,11 +38,11 @@ public class Sede implements Coordenable{
         this.direccion = direccion;
     }
 
-    public Map<Votante, String> getPersonasxRut() {
+    public Map<Persona, String> getPersonasxRut() {
         return votantesxrut;
     }
 
-    public void setPersonasxRut(Map<Votante, String> personasxRut) {
+    public void setPersonasxRut(Map<Persona, String> personasxRut) {
         this.votantesxrut = personasxRut;
     }
 
@@ -58,6 +62,14 @@ public class Sede implements Coordenable{
     @Override
     public void setCoords() {
         this.direccion.setCoords();
+    }
+
+    public void agregarMesa(int numeroMesa) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void agregarMesa(Mesa mesa) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

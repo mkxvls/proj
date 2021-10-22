@@ -12,13 +12,17 @@ public class Mesa {
     private int numero;
     private List<Vocal> vocales;
     private List<Apoderade> apoderades;
-    private List<Votante> votantes;
+    private List<Persona> votantes;
     
     public Mesa(){
         this.capacidad = 50;
     }
 
-    public void agregarPersona(Votante persona){
+    public Mesa(int numeroMesa) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void agregarPersona(Persona persona){
        if ( !(capacidad >= CAPMAX)){
            this.votantes.add(persona);
        }
@@ -56,11 +60,11 @@ public class Mesa {
         this.numero = numero;
     }
 
-    public List<Votante> getVotantes() {
+    public List<Persona> getVotantes() {
         return votantes;
     }
 
-    public void setVotantes(List<Votante> votantes) {
+    public void setVotantes(List<Persona> votantes) {
         this.votantes = votantes;
     }
     

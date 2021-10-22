@@ -160,4 +160,8 @@ public class Consola {
     private void ayuda(){
         System.out.println("manejo por consola\nIngrese con \"enter\"el numero de las opciones para seleccionar");
     }
+
+    public void display(String display) {
+        System.out.println(display);
+    }
 }

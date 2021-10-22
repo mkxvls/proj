@@ -5,7 +5,7 @@ package modelo;
  *
  * @author Maximiliano Valencia Saez
  */
-public class Vocal extends Votante {
+public class Vocal extends Persona {
     private boolean asistencia;
     
     public Vocal(){

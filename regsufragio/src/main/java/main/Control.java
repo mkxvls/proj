@@ -10,6 +10,9 @@ import java.net.URL;
 import java.net.URLConnection;
 import modelo.Direccion;
 import modelo.Distrito;
+import modelo.Mesa;
+import modelo.Sede;
+import modelo.Persona;
 import org.json.*;
 
 /**
@@ -21,16 +24,18 @@ public class Control {
     private static final String URLbase="https://maps.googleapis.com/maps/api/geocode/json?address=";
     
     private Distrito distrito;
-    
-    public Control(Distrito distrito) throws IOException{
+    private Consola consola;
+    public Control() throws IOException{
         //pruebita();
-        this.distrito = distrito;
-        cargar(this.distrito);
+        this.distrito = new Distrito();
+        this.consola = new Consola();
+        cargar();
         run();
     }
    
-    private void cargar(Distrito distrito) throws FileNotFoundException, IOException{
-        System.out.println("TESTING");
+    private void cargar() throws FileNotFoundException, IOException{
+        consola.display("CARGAR");
+        
         try (BufferedReader lector = new BufferedReader(new FileReader("datos.json"))) {
             String linea = "";
             String datos = "";
@@ -38,40 +43,41 @@ public class Control {
             while( (linea = lector.readLine())!=null ){
                 datos=datos+linea;
             }
-            JSONObject job = new JSONObject(datos);
-            JSONArray jarr = job.getJSONArray("Sedes");
+            lector.close();
+            
+            JSONObject job = new JSONObject(datos); //armar objeto json con datos leidos
+            JSONArray jarr = job.getJSONArray("Sedes"); // agarrar el arreglo Sedes desde el objeto json
              
             datos = "";
-            String nombreSede;
-            String direccionSede;
-            int numeroMesa;
-            for(Object o : jarr){
-    System.out.println("Sede:");
-                JSONObject jobi = (JSONObject) o;
-                nombreSede = jobi.getString("Nombre");
-    System.out.println(nombreSede);
-                direccionSede = jobi.getString("Direccion");
-    System.out.println(direccionSede);
-                JSONArray jarrMesas = jobi.getJSONArray("Mesas");
-    System.out.println(jarrMesas.toString());
+            Sede sede = null;
+            for(Object oSede : jarr){
+                //para cada sede en el arreglo hacer ...
+                JSONObject jSede = (JSONObject) oSede;
+                sede = new Sede(jSede.getString("Nombre"),jSede.getString("Direccion"));
+                JSONArray jarrMesas = jSede.getJSONArray("Mesas"); //agarrar el arreglo de mesas en la Sede
                 for(Object oMesa : jarrMesas){
-                    JSONObject mesa = (JSONObject) oMesa;
-                    numeroMesa = mesa.getInt("numero");
-                    System.out.println(mesa.toString());
-                    JSONArray jarrVotantes = mesa.getJSONArray("Personas");
+                    // para cada mesa del arreglo hacer ...
+                    JSONObject jMesa = (JSONObject) oMesa;
+                    sede.agregarMesa(jMesa.getInt("numero"));
+                    JSONArray jarrVotantes = jMesa.getJSONArray("Personas"); //agarrar el arreglo de personas en la mesa
                     for (Object oPersona : jarrVotantes){
-                        JSONObject persona = (JSONObject) oPersona;
-                        System.out.println(persona.toString());
+                        // para cada persona del arreglo hacer ...
+                        JSONObject jPersona = (JSONObject) oPersona;
+                        this.distrito.agregarPersona(   jPersona.getString("Nombre"),
+                                                        jPersona.getString("Apellidos"),
+                                                        jPersona.getString("Direccion"),
+                                                        jPersona.getString("rut"),
+                                                        jPersona.getString("tipo"),
+                                                        jMesa.getInt("numero"));
                     }
-                        
                 }
-            }   
+            }
+            this.distrito.agregarSede(sede);
         }
     }
     private void run() throws IOException{
         Opcion op = null;
         boolean flag = true;
-        Consola consola = new Consola();
         
         String input="";
         while(flag){

@@ -4,7 +4,7 @@ package modelo;
  *
  * @author Maximiliano Valencia Saez
  */
-public class Apoderade extends Votante{
+public class Apoderade extends Persona{
     private String partido;
     
     public Apoderade(){

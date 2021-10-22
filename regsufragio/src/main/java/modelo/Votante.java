@@ -1,63 +1,24 @@
 package modelo;
 
-/**
- * Votante abstracta
- * @author Maximiliano Valencia Saez
- */
-public abstract class Votante implements Coordenable {
-    private String rut;
-    private String Nombres;
-    private String Apellidos;
-    private String idMesa;
-    private Direccion direccion;
-    
-    public Votante(){
-        
-    }
-    
-    public abstract String getTipo();
+
+public class Votante extends Persona {
+    private static final String tipo = "Votante normal";
     
     
     
-    public String getRut() {
-        return rut;
+    @Override
+    public String getTipo() {
+        return this.tipo;
     }
 
-    public void setRut(String rut) {
-        this.rut = rut;
+    @Override
+    public Double[] getCoords() {
+        return this.getDireccion().getCoords();
     }
 
-    public String getNombres() {
-        return Nombres;
+    @Override
+    public void setCoords() {
+        this.getDireccion().setCoords();
     }
-
-    public void setNombres(String Nombres) {
-        this.Nombres = Nombres;
-    }
-
-    public String getApellidos() {
-        return Apellidos;
-    }
-
-    public void setApellidos(String Apellidos) {
-        this.Apellidos = Apellidos;
-    }
-
-    public String getIdMesa() {
-        return idMesa;
-    }
-
-    public void setIdMesa(String idMesa) {
-        this.idMesa = idMesa;
-    }
-
-    public Direccion getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(Direccion direccion) {
-        this.direccion = direccion;
-    }
-    
     
 }

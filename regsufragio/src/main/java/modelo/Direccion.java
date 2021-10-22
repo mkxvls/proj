@@ -15,10 +15,6 @@ public class Direccion implements Coordenable{
         this.calle=calle;
         this.ciudad=ciudad;
     }
-
-    Direccion() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
     public String getNumero() {
         return numero;
