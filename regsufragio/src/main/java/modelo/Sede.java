@@ -10,6 +10,7 @@ import java.util.TreeMap;
  * @author Maximiliano Valencia Saez
  */
 public class Sede implements Coordenable{
+    private String nombre;
     private Direccion direccion;
     private Map<Persona,String> votantesxrut;
     private List<Mesa> mesas;
@@ -27,7 +28,10 @@ public class Sede implements Coordenable{
     }
 
     public Sede(String nombreSede, String direccionSede) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.nombre = nombreSede;
+        this.direccion = new Direccion(direccionSede);
+        this.votantesxrut = new TreeMap<>();
+        this.mesas = new ArrayList<>();
     }
 
     public Direccion getDireccion() {
@@ -72,4 +76,20 @@ public class Sede implements Coordenable{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public Map<Persona, String> getVotantesxrut() {
+        return votantesxrut;
+    }
+
+    public void setVotantesxrut(Map<Persona, String> votantesxrut) {
+        this.votantesxrut = votantesxrut;
+    }
+    
 }

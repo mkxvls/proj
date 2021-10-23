@@ -10,9 +10,9 @@ import java.util.TreeMap;
  */
 public class Distrito {
     private String numero;
-    private Map<Persona,String> personasxRut;
-    private Map<Persona,String> personasxSede;
-    private Map<Sede,String> sedes;
+    private Map<String,Persona> personasxRut;
+    private Map<String,Persona> personasxSede;
+    private Map<String,Sede> sedes;
     
     public Distrito(){
         this.numero="";
@@ -26,30 +26,31 @@ public class Distrito {
     public void setNumero(String numero) {
         this.numero = numero;
     }
-    public Map<Persona, String> getPersonasxRut() {
+
+    public Map<String, Persona> getPersonasxRut() {
         return personasxRut;
     }
 
-    public void setPersonasxRut(Map<Persona, String> personasxRut) {
+    public void setPersonasxRut(Map<String, Persona> personasxRut) {
         this.personasxRut = personasxRut;
     }
 
-    public Map<Persona, String> getPersonasxSede() {
+    public Map<String, Persona> getPersonasxSede() {
         return personasxSede;
     }
 
-    public void setPersonasxSede(Map<Persona, String> personaxSede) {
-        this.personasxSede = personaxSede;
+    public void setPersonasxSede(Map<String, Persona> personasxSede) {
+        this.personasxSede = personasxSede;
     }
 
-    public Map<Sede, String> getSedes() {
+    public Map<String, Sede> getSedes() {
         return sedes;
     }
 
-    public void setSedes(Map<Sede, String> sedes) {
+    public void setSedes(Map<String, Sede> sedes) {
         this.sedes = sedes;
     }
-
+    
     public void agregarSede(String input) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -71,6 +72,14 @@ public class Distrito {
     }
 
     public void agregarPersona(Persona votante) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void agregarPersona(String string, String string0, String string1, String string2, String string3) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void agregarPersona(String string, String string0, String string1, String string2, String string3, int aInt) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

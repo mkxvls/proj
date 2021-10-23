@@ -1,13 +1,17 @@
 package main;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Map;
+import java.util.TreeMap;
 import modelo.Direccion;
 import modelo.Distrito;
 import modelo.Mesa;
@@ -20,8 +24,6 @@ import org.json.*;
  * @author Maximiliano Valencia Saez
  */
 public class Control {
-    private static final String keyAPI="&key=AIzaSyD1NHmgiisgmLJ6i6owEXtCVcsNCqDeTxQ";
-    private static final String URLbase="https://maps.googleapis.com/maps/api/geocode/json?address=";
     
     private Distrito distrito;
     private Consola consola;
@@ -31,8 +33,43 @@ public class Control {
         this.consola = new Consola();
         cargar();
         run();
+        guardar();
     }
    
+    private void guardar() throws IOException{
+        consola.display("GUARDAR");
+        try(BufferedWriter escritor = new BufferedWriter(new FileWriter("datosa.json"))){
+            JSONObject datos = new JSONObject();
+            JSONArray arregloSedes = new JSONArray();
+            for(Map.Entry<String,Sede> entry : this.distrito.getSedes().entrySet()){
+                JSONObject jsonSede = new JSONObject();
+                Sede sede = entry.getValue();
+                jsonSede.put("Nombre", sede.getNombre());
+                jsonSede.put("Direccion",sede.getDireccion());
+                JSONArray arregloMesas = new JSONArray();
+                for(Mesa mesa : sede.getMesas()){
+                    JSONObject jsonMesa = new JSONObject();
+                    jsonMesa.put("numero",mesa.getNumero());
+                    JSONArray arregloPersonas = new JSONArray();
+                    for (Persona persona : mesa.getPersonas()){
+                        JSONObject jsonPersona = new JSONObject();
+                        jsonPersona.put("Nombre",persona.getNombres());
+                        jsonPersona.put("Apellidos",persona.getApellidos());
+                        jsonPersona.put("rut", persona.getRut());
+                        jsonPersona.put("Direccion",persona.getDireccion());
+                        jsonPersona.put("tipo",persona.getTipo());
+                        arregloPersonas.put(jsonPersona);
+                    }
+                    arregloMesas.put(jsonMesa);
+                }
+                arregloSedes.put(jsonSede);
+            }
+            datos.put("Sedes",arregloSedes);
+            escritor.write(datos.toString());
+            escritor.close();
+        }
+        consola.display("GUARDADO");
+    }
     private void cargar() throws FileNotFoundException, IOException{
         consola.display("CARGAR");
         
@@ -76,58 +113,29 @@ public class Control {
         }
     }
     private void run() throws IOException{
-        Opcion op = null;
+        Opcion op;
         boolean flag = true;
         
-        String input="";
+        String input;
         while(flag){
-            input ="";
+            input="";
             consola.setOutput("");
             op = consola.menu();
             input = consola.getInput();
             switch(op){
-                case AGREGARSEDE:
-                    this.distrito.agregarSede(input);
-                    break;
-                case AGREGARMESA:
-                    this.distrito.agregarMesa(input);
-                    break;
-                case AGREGARPERSONA:
-                    this.distrito.agregarMesa(input);
-                    break;
-                case MOSTRARSEDES:
-                    consola.setOutput(this.distrito.mostrarSedes());
-                    break;
-                case MOSTRARSEDESYPERSONAS:
-                    consola.setOutput(this.distrito.mostrarSedesYPersonas());
-                    break;
-                case SALIR: flag = false; break;
-                default:
+                case AGREGARSEDE -> this.distrito.agregarSede(input);
+                case AGREGARMESA -> this.distrito.agregarMesa(input);
+                case AGREGARPERSONA -> this.distrito.agregarMesa(input);
+                case MOSTRARSEDES -> consola.setOutput(this.distrito.mostrarSedes());
+                case MOSTRARSEDESYPERSONAS -> consola.setOutput(this.distrito.mostrarSedesYPersonas());
+                case SALIR -> flag = false;
+                default -> {
+                }
                     
             }
         }  
     }
     
-    public void pruebita() throws MalformedURLException, IOException{
-        Direccion addr = new Direccion("2950","Brasil","Valparaiso");
-        
-        String urlquery = URLbase + addr.getNumero()+"+"+addr.getCalle() + "," + addr.getCiudad() + keyAPI;
-//System.out.println(urlquery);
-        URL url = new URL(urlquery);
-        URLConnection conn = url.openConnection();
-        String input;
-        try (BufferedReader stream = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
-            String inputLine;
-            input = "";
-            while((inputLine = stream.readLine()) != null){
-                input=input+inputLine;
-            }
-        }
-        JSONObject json = new JSONObject(input).getJSONArray("results").getJSONObject(0).getJSONObject("geometry").getJSONObject("location");
-//System.out.println(json.toString());
-        double lng = json.getDouble("lng");
-        double lat = json.getDouble("lat");
-        System.out.println(lng +" "+lat);
-    }
+    
     
 }

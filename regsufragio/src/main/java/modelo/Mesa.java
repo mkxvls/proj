@@ -1,5 +1,6 @@
 package modelo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,6 +17,9 @@ public class Mesa {
     
     public Mesa(){
         this.capacidad = 50;
+        this.vocales = new ArrayList<>();
+        this.apoderades = new ArrayList<>();
+        this.votantes = new ArrayList<>();
     }
 
     public Mesa(int numeroMesa) {
@@ -68,4 +72,11 @@ public class Mesa {
         this.votantes = votantes;
     }
     
+    public List<Persona> getPersonas(){
+        List<Persona> newList = new ArrayList<>();
+        newList.addAll(this.votantes);
+        newList.addAll(this.vocales);
+        newList.addAll(this.apoderades);
+        return newList;
+    }
 }

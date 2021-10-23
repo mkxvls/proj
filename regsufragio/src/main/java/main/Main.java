@@ -2,6 +2,7 @@
 package main;
 
 import java.io.IOException;
+import java.util.Base64;
 import modelo.Distrito;
 
 /**
