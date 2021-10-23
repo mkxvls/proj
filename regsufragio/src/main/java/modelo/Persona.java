@@ -10,6 +10,7 @@ public abstract class Persona implements Coordenable {
     private String Apellidos;
     private int idMesa;
     private Direccion direccion;
+    private boolean isAsignadoASede = false;
     
     public Persona(){
         
@@ -18,7 +19,10 @@ public abstract class Persona implements Coordenable {
     
     public abstract String getTipo();
     
-    
+    @Override
+    public String getDireccionString(){
+        return this.direccion.getDireccionString();
+    }
     
     public String getRut() {
         return rut;
@@ -58,6 +62,14 @@ public abstract class Persona implements Coordenable {
 
     public void setDireccion(Direccion direccion) {
         this.direccion = direccion;
+    }
+
+    public boolean isIsAsignadoASede() {
+        return isAsignadoASede;
+    }
+
+    public void setIsAsignadoASede(boolean isAsignadoASede) {
+        this.isAsignadoASede = isAsignadoASede;
     }
     
     

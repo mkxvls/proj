@@ -7,4 +7,5 @@ package modelo;
 public interface Coordenable {
     public Double[] getCoords();
     public void setCoords();
+    public String getDireccionString();
 }

@@ -18,8 +18,23 @@ public class Distrito {
         this.numero="";
         this.personasxRut= new TreeMap<>();
         this.personasxSede = new TreeMap<>();
-        this.sedes = new TreeMap<>();   
+        this.sedes = new TreeMap<>();
+        cargarPrueba();
     }
+    private void cargarPrueba(){
+        
+        agregarSede(new Sede("PUCV","Brasil 2950,Valparaiso"));
+        agregarSede(new Sede("LICEO JUANA ROSS DE EDWARDS","Argentina 871,Valparaiso"));
+        agregarSede(new Sede("LICEO TECNOLOGICO VILLA ALEMANA","Valparaiso 133,Villa Alemana"));
+        
+        agregarPersona("Pedro Juan","Soto Perez","11.111.111-1","Condell 1546,Valparaiso","Vocal");
+        agregarPersona("Juan Pedro","Soto Perez","11.111.111-2","Condell 1546,Valparaiso","Votante");
+        agregarPersona("cosme","fulanito","11.111.111-3","Labruyere 284,Valparaiso","Apoderade");
+        agregarPersona("Felipe","Sanchez","11.111.111-4","Alba 107,Valparaiso","Votante");
+        agregarPersona("Rachel","Sanchez","11.111.111-5","El Vergel 203,Valparaiso","Vocal");
+        
+    }
+    
     public String getNumero() {
         return numero;
     }
@@ -50,37 +65,26 @@ public class Distrito {
     public void setSedes(Map<String, Sede> sedes) {
         this.sedes = sedes;
     }
-    
-    public void agregarSede(String input) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void agregarMesa(String input) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public String mostrarSedes() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public String mostrarSedesYPersonas() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     public void agregarSede(Sede sede) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.sedes.put(sede.getNombre(), sede);
     }
 
-    public void agregarPersona(Persona votante) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void agregarPersona(String nombres, String apellidos, String rut, String direccion, String tipo) {
+        switch(tipo){
+            case "Vocal" -> this.personasxRut.put(rut,new Vocal(nombres,apellidos,rut,direccion));
+            case "Votante" -> this.personasxRut.put(rut,new Votante(nombres,apellidos,rut,direccion));
+            case "Apoderade" -> this.personasxRut.put(rut,new Apoderade(nombres,apellidos,rut,direccion));
+        }
     }
 
-    public void agregarPersona(String string, String string0, String string1, String string2, String string3) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void agregarPersona(String nombres, String apellidos, String rut, String direccion, String tipo, String nombreSede) {
+        agregarPersona(nombres,apellidos,rut,direccion,tipo);
+        switch(tipo){
+            case "Vocal" -> this.personasxSede.put(nombreSede, new Vocal(nombres,apellidos,rut,direccion));
+            case "Votante" -> this.personasxSede.put(nombreSede,new Votante(nombres,apellidos,rut,direccion));
+            case "Apoderade" -> this.personasxSede.put(nombreSede, new Apoderade(nombres,apellidos,rut,direccion));
+        }
     }
 
-    public void agregarPersona(String string, String string0, String string1, String string2, String string3, int aInt) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
 }

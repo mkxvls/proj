@@ -28,12 +28,11 @@ public class Control {
     private Distrito distrito;
     private Consola consola;
     public Control() throws IOException{
-        //pruebita();
         this.distrito = new Distrito();
         this.consola = new Consola();
-        cargar();
-        run();
-        guardar();
+        //cargar();
+        //run();
+        //guardar();
     }
    
     private void guardar() throws IOException{
@@ -56,8 +55,8 @@ public class Control {
                         jsonPersona.put("Nombre",persona.getNombres());
                         jsonPersona.put("Apellidos",persona.getApellidos());
                         jsonPersona.put("rut", persona.getRut());
-                        jsonPersona.put("Direccion",persona.getDireccion());
                         jsonPersona.put("tipo",persona.getTipo());
+                        jsonPersona.put("Direccion",persona.getDireccionString());
                         arregloPersonas.put(jsonPersona);
                     }
                     arregloMesas.put(jsonMesa);
@@ -65,7 +64,8 @@ public class Control {
                 arregloSedes.put(jsonSede);
             }
             datos.put("Sedes",arregloSedes);
-            escritor.write(datos.toString());
+            //escritor.write(datos.toString());
+            System.out.println(datos.toString());
             escritor.close();
         }
         consola.display("GUARDADO");
@@ -105,7 +105,7 @@ public class Control {
                                                         jPersona.getString("Direccion"),
                                                         jPersona.getString("rut"),
                                                         jPersona.getString("tipo"),
-                                                        jMesa.getInt("numero"));
+                                                        sede.getNombre() );
                     }
                 }
             }
@@ -122,6 +122,7 @@ public class Control {
             consola.setOutput("");
             op = consola.menu();
             input = consola.getInput();
+            /**
             switch(op){
                 case AGREGARSEDE -> this.distrito.agregarSede(input);
                 case AGREGARMESA -> this.distrito.agregarMesa(input);
@@ -133,6 +134,7 @@ public class Control {
                 }
                     
             }
+            **/
         }  
     }
     

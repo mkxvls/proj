@@ -91,5 +91,10 @@ public class Sede implements Coordenable{
     public void setVotantesxrut(Map<Persona, String> votantesxrut) {
         this.votantesxrut = votantesxrut;
     }
+
+    @Override
+    public String getDireccionString() {
+        return this.direccion.getDireccionString();
+    }
     
 }
