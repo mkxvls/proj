@@ -2,13 +2,16 @@ package modelo;
 
 
 public class Votante extends Persona {
-    private static final String tipo = "Votante normal";
+
+    public Votante(String nombres, String apellidos, String rut, String direccion) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
     
     @Override
     public String getTipo() {
-        return this.tipo;
+        return Persona.VOTANTE;
     }
 
     @Override

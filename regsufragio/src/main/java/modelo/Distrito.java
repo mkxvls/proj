@@ -27,12 +27,14 @@ public class Distrito {
         agregarSede(new Sede("LICEO JUANA ROSS DE EDWARDS","Argentina 871,Valparaiso"));
         agregarSede(new Sede("LICEO TECNOLOGICO VILLA ALEMANA","Valparaiso 133,Villa Alemana"));
         
-        agregarPersona("Pedro Juan","Soto Perez","11.111.111-1","Condell 1546,Valparaiso","Vocal");
-        agregarPersona("Juan Pedro","Soto Perez","11.111.111-2","Condell 1546,Valparaiso","Votante");
-        agregarPersona("cosme","fulanito","11.111.111-3","Labruyere 284,Valparaiso","Apoderade");
-        agregarPersona("Felipe","Sanchez","11.111.111-4","Alba 107,Valparaiso","Votante");
-        agregarPersona("Rachel","Sanchez","11.111.111-5","El Vergel 203,Valparaiso","Vocal");
-        
+        agregarPersona("Pedro Juan","Soto Perez","11.111.111-1","Condell 1546,Valparaiso",Persona.VOTANTE);
+        agregarPersona("Juan Pedro","Soto Perez","11.111.111-2","Condell 1546,Valparaiso",Persona.VOTANTE);
+        agregarPersona("cosme","fulanito","11.111.111-3","Labruyere 284,Valparaiso",Persona.VOTANTE);
+        agregarPersona("Felipe","Sanchez","11.111.111-4","Alba 107,Valparaiso",Persona.VOTANTE);
+        agregarPersona("Rachel","Sanchez","11.111.111-5","El Vergel 203,Valparaiso",Persona.VOTANTE);
+        agregarPersona("nombre1","apellido1","22.222.222-1","Valparaíso 298, Valparaíso",Persona.VOTANTE);
+        agregarPersona("nombre2","apellido2","22.222.222-2","Valparaíso 298, Valparaíso",Persona.VOTANTE);
+        agregarPersona("nombre3","apellido3","22.222.222-3","Pedro Montt 2585, Valparaíso",Persona.VOTANTE);
     }
     
     public String getNumero() {
@@ -71,6 +73,7 @@ public class Distrito {
     }
 
     public void agregarPersona(String nombres, String apellidos, String rut, String direccion, String tipo) {
+        
         switch(tipo){
             case "Vocal" -> this.personasxRut.put(rut,new Vocal(nombres,apellidos,rut,direccion));
             case "Votante" -> this.personasxRut.put(rut,new Votante(nombres,apellidos,rut,direccion));
@@ -86,5 +89,4 @@ public class Distrito {
             case "Apoderade" -> this.personasxSede.put(nombreSede, new Apoderade(nombres,apellidos,rut,direccion));
         }
     }
-
 }

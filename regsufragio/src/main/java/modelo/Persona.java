@@ -5,14 +5,21 @@ package modelo;
  * @author Maximiliano Valencia Saez
  */
 public abstract class Persona implements Coordenable {
+    public static final String VOCAL = "Vocal";
+    public static final String VOTANTE = "Votante";
+    public static final String APODERADE = "Apoderade";
+    
     private String rut;
     private String Nombres;
     private String Apellidos;
-    private int idMesa;
     private Direccion direccion;
     private boolean isAsignadoASede = false;
-    
+    private String mesa;
     public Persona(){
+        
+    }
+    
+    public Persona(String nombre,String apellido,String rut,String direccion){
         
     }
 
@@ -48,14 +55,6 @@ public abstract class Persona implements Coordenable {
         this.Apellidos = Apellidos;
     }
 
-    public int getIdMesa() {
-        return idMesa;
-    }
-
-    public void setIdMesa(int idMesa) {
-        this.idMesa = idMesa;
-    }
-
     public Direccion getDireccion() {
         return direccion;
     }
@@ -70,6 +69,14 @@ public abstract class Persona implements Coordenable {
 
     public void setIsAsignadoASede(boolean isAsignadoASede) {
         this.isAsignadoASede = isAsignadoASede;
+    }
+
+    public String getMesa() {
+        return mesa;
+    }
+
+    public void setMesa(String mesa) {
+        this.mesa = mesa;
     }
     
     

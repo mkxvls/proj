@@ -13,6 +13,10 @@ public class Vocal extends Persona {
         this.asistencia=false;
     }
 
+    public Vocal(String nombres, String apellidos, String rut, String direccion) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public boolean asistencia() {
         return asistencia;
     }
@@ -24,7 +28,7 @@ public class Vocal extends Persona {
     
     @Override
     public String getTipo() {
-        return "Vocal";
+        return Persona.VOCAL;
     }
 
     @Override

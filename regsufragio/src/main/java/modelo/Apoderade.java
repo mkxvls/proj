@@ -10,9 +10,13 @@ public class Apoderade extends Persona{
     public Apoderade(){
         this.partido="No especifica";
     }
+
+    public Apoderade(String nombres, String apellidos, String rut, String direccion) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     @Override
     public String getTipo() {
-        return "Apoderade";
+        return Persona.APODERADE;
     }
     @Override
     public Double[] getCoords() {
