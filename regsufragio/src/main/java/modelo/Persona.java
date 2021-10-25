@@ -13,7 +13,9 @@ public abstract class Persona implements Coordenable {
     private String Nombres;
     private String Apellidos;
     private Direccion direccion;
-    private boolean isAsignadoASede = false;
+    private boolean tieneSede = false;
+    private boolean tieneMesa = false;
+    private String sede;
     private String mesa;
     public Persona(){
         
@@ -67,12 +69,12 @@ public abstract class Persona implements Coordenable {
         this.direccion = direccion;
     }
 
-    public boolean isIsAsignadoASede() {
-        return isAsignadoASede;
+    public boolean isTieneSede() {
+        return tieneSede;
     }
 
-    public void setIsAsignadoASede(boolean isAsignadoASede) {
-        this.isAsignadoASede = isAsignadoASede;
+    public void setTieneSede(boolean tieneSede) {
+        this.tieneSede = tieneSede;
     }
 
     public String getMesa() {
@@ -81,6 +83,22 @@ public abstract class Persona implements Coordenable {
 
     public void setMesa(String mesa) {
         this.mesa = mesa;
+    }
+
+    public String getSede() {
+        return sede;
+    }
+
+    public void setSede(String sede) {
+        this.sede = sede;
+    }
+
+    public boolean isTieneMesa() {
+        return tieneMesa;
+    }
+
+    public void setTieneMesa(boolean tieneMesa) {
+        this.tieneMesa = tieneMesa;
     }
     
     

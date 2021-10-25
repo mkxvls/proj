@@ -33,6 +33,18 @@ public class Sede implements Coordenable{
         this.votantesxrut = new TreeMap<>();
         this.mesas = new ArrayList<>();
     }
+    public void asignarMesas(){
+        if(this.mesas.isEmpty()){
+            agregarMesa();
+        }
+        for(Mesa mesa : this.mesas){
+            for(Map.Entry entry : this.votantesxrut.entrySet()){
+                if( !((Persona) entry.getValue()).isTieneMesa() && !mesa.isLlena()){
+                    mesa.agregarPersona((Persona) entry.getValue());
+                }
+            }
+        }
+    }
 
     public Direccion getDireccion() {
         return direccion;
@@ -59,6 +71,10 @@ public class Sede implements Coordenable{
     @Override
     public void setCoords() {
         this.direccion.setCoords();
+    }
+    
+    public void agregarMesa(){
+        agregarMesa( new Mesa(1) );
     }
 
     public void agregarMesa(int numeroMesa) {

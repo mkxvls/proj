@@ -38,7 +38,7 @@ public class Direccion implements Coordenable{
         String[] tokens = tokenizarDireccion(direccionSede);
         this.numero=tokens[0];
         this.calle=tokens[1];
-        this.calle=tokens[2];
+        this.ciudad=tokens[2];
     }
 
     public Direccion() {
@@ -47,7 +47,7 @@ public class Direccion implements Coordenable{
     
     private void fijarCoords() throws MalformedURLException, IOException{
         String urlquery = URLbase + this.getNumero()+"+"+this.getCalle() + "," + this.getCiudad() + keyAPI;
-        URL url = new URL(urlquery);
+        URL url = new URL(urlquery.replaceAll("\\s","%"));
         URLConnection conn = url.openConnection();
         String input="";
         try (BufferedReader stream = new BufferedReader(new InputStreamReader(conn.getInputStream()))) {
@@ -59,6 +59,7 @@ public class Direccion implements Coordenable{
         JSONObject json = new JSONObject(input).getJSONArray("results").getJSONObject(0).getJSONObject("geometry").getJSONObject("location");
         this.lng = json.getDouble("lng");
         this.lat = json.getDouble("lat");
+        System.out.println(this.lat + "--" + this.lng + ":" + "ciudad:"+this.ciudad +"calle:"+this.calle +"numero:"+this.numero );
         this.coordenada=true;
     }
     
@@ -66,7 +67,7 @@ public class Direccion implements Coordenable{
             String[] direccion = string.split(",");
             String tokenCiudad = direccion[1];
             String tokenNumero = Integer.toString(getIntFromEnd(direccion[0]));
-            String tokenCalle = direccion[0].replace(" "+numero,""); 
+            String tokenCalle = direccion[0].replaceAll(" "+tokenNumero,"");
           return new String[]{tokenNumero,tokenCalle,tokenCiudad};
     }
     

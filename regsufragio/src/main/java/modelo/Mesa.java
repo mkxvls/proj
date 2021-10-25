@@ -8,31 +8,34 @@ import java.util.List;
  * @author Maximiliano Valencia Saez
  */
 public class Mesa {
-    private static final int CAPMAX = 50;
-    private int capacidad;
+    private static final int CAPMAX = 15;
     private int numero;
     private List<Vocal> vocales;
     private List<Apoderade> apoderades;
     private List<Persona> votantes;
+    private boolean llena=false;
     
     public Mesa(){
-        this.capacidad = 50;
         this.vocales = new ArrayList<>();
         this.apoderades = new ArrayList<>();
         this.votantes = new ArrayList<>();
     }
 
     public Mesa(int numeroMesa) {
+        this();
         this.numero=numeroMesa;
     }
 
     public void agregarPersona(Persona persona){
-       if ( !(capacidad >= CAPMAX)){
+       if ( !this.llena){
            this.votantes.add(persona);
            switch(persona.getTipo()){
                case Persona.APODERADE -> this.apoderades.add((Apoderade) persona);
                case Persona.VOCAL -> this.vocales.add((Vocal) persona);
            }
+       }
+       if(this.votantes.size()>=CAPMAX){
+           this.llena=true;
        }
     }
 
@@ -50,14 +53,6 @@ public class Mesa {
 
     public void setApoderades(List<Apoderade> apoderades) {
         this.apoderades = apoderades;
-    }
-
-    public int getCapacidad() {
-        return capacidad;
-    }
-
-    public void setCapacidad(int capacidad) {
-        this.capacidad = capacidad;
     }
 
     public int getNumero() {
@@ -83,4 +78,13 @@ public class Mesa {
         newList.addAll(this.apoderades);
         return newList;
     }
+
+    public boolean isLlena() {
+        return llena;
+    }
+
+    public void setLlena(boolean llena) {
+        this.llena = llena;
+    }
+    
 }

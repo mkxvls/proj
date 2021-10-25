@@ -21,12 +21,13 @@ public class Control {
     
     private Distrito distrito;
     private Consola consola;
+    
     public Control() throws IOException{
         this.distrito = new Distrito();
         this.consola = new Consola();
         //cargar();
         //run();
-        //guardar();
+        guardar();
     }
    
     private void guardar() throws IOException{
@@ -37,15 +38,15 @@ public class Control {
             for(Map.Entry<String,Sede> entry : this.distrito.getSedes().entrySet()){ 
                 JSONObject jsonSede = new JSONObject(); //crear objeto sedes, que va en el arreglosedes 
                 Sede sede = entry.getValue();   //agarrar la sede de la entrada
-                jsonSede.put("Nombre", sede.getNombre());   
-                jsonSede.put("Direccion",sede.getDireccion());
+                //lenar sede
                 JSONArray arregloMesas = new JSONArray();   //crear arreglomesas
                 for(Mesa mesa : sede.getMesas()){
                     JSONObject jsonMesa = new JSONObject();  //crear objeto mesa
-                    jsonMesa.put("numero",mesa.getNumero());
+                    //llenar mesa
                     JSONArray arregloPersonas = new JSONArray();    //crear arreglopersonas
                     for (Persona persona : mesa.getPersonas()){ //UTILIZACION DE CLASE ABSTRACTA EN CONTEXTO
                         JSONObject jsonPersona = new JSONObject();  //crear objeto persona
+                        //lenar persona
                         jsonPersona.put("Nombre",persona.getNombres());
                         jsonPersona.put("Apellidos",persona.getApellidos());
                         jsonPersona.put("rut", persona.getRut());
@@ -54,13 +55,16 @@ public class Control {
                         arregloPersonas.put(jsonPersona);   //colocar objeto persona en arregloPersonas
                     }
                     jsonMesa.put("Personas",arregloPersonas); //colocar arregloPersona en objeto mesa
+                    jsonMesa.put("numero",mesa.getNumero());
                     arregloMesas.put(jsonMesa); //colocar objeto mesa en arregloMesa
                 }
                 jsonSede.put("Mesas",arregloMesas); //colocar arreglomesas en objeto sede
+                jsonSede.put("Nombre", sede.getNombre());   
+                jsonSede.put("Direccion",sede.getDireccionString());
                 arregloSedes.put(jsonSede); //colocar objetoSede en arregloSede
             }
             datos.put("Sedes",arregloSedes); //colocar arregloSedes en objeto datos
-            //escritor.write(datos.toString());
+            escritor.write(datos.toString());
             System.out.println(datos.toString());
             escritor.close();
         }
