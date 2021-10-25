@@ -23,12 +23,16 @@ public class Mesa {
     }
 
     public Mesa(int numeroMesa) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.numero=numeroMesa;
     }
 
     public void agregarPersona(Persona persona){
        if ( !(capacidad >= CAPMAX)){
            this.votantes.add(persona);
+           switch(persona.getTipo()){
+               case Persona.APODERADE -> this.apoderades.add((Apoderade) persona);
+               case Persona.VOCAL -> this.vocales.add((Vocal) persona);
+           }
        }
     }
 

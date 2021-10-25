@@ -12,7 +12,7 @@ public class Apoderade extends Persona{
     }
 
     public Apoderade(String nombres, String apellidos, String rut, String direccion) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        super(nombres,apellidos,rut,direccion);
     }
     @Override
     public String getTipo() {
@@ -31,5 +31,10 @@ public class Apoderade extends Persona{
     }
     public void setPartido(String partido) {
         this.partido = partido;
+    }
+
+    @Override
+    public boolean isCoordenada() {
+        return this.getDireccion().isCoordenada();
     }
 }

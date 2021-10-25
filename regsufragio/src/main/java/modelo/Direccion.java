@@ -25,6 +25,7 @@ public class Direccion implements Coordenable{
     private String ciudad;
     private double lat; //latitud
     private double lng; //longitud
+    private boolean coordenada=false;
 
     public Direccion(String numero,String calle,String ciudad) {
         this.numero = numero;
@@ -58,6 +59,7 @@ public class Direccion implements Coordenable{
         JSONObject json = new JSONObject(input).getJSONArray("results").getJSONObject(0).getJSONObject("geometry").getJSONObject("location");
         this.lng = json.getDouble("lng");
         this.lat = json.getDouble("lat");
+        this.coordenada=true;
     }
     
     private String[] tokenizarDireccion(String string){
@@ -135,5 +137,15 @@ public class Direccion implements Coordenable{
             Logger.getLogger(Direccion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public boolean isCoordenada() {
+        return coordenada;
+    }
+
+    public void setCoordenada(boolean coordenada) {
+        this.coordenada = coordenada;
+    }
+    
+    
     
 }

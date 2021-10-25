@@ -32,32 +32,34 @@ public class Control {
     private void guardar() throws IOException{
         consola.display("GUARDAR");
         try(BufferedWriter escritor = new BufferedWriter(new FileWriter("datosa.json"))){
-            JSONObject datos = new JSONObject();
-            JSONArray arregloSedes = new JSONArray();
-            for(Map.Entry<String,Sede> entry : this.distrito.getSedes().entrySet()){
-                JSONObject jsonSede = new JSONObject();
-                Sede sede = entry.getValue();
-                jsonSede.put("Nombre", sede.getNombre());
+            JSONObject datos = new JSONObject(); //crear objeto datos
+            JSONArray arregloSedes = new JSONArray(); //crear  arreglosedes
+            for(Map.Entry<String,Sede> entry : this.distrito.getSedes().entrySet()){ 
+                JSONObject jsonSede = new JSONObject(); //crear objeto sedes, que va en el arreglosedes 
+                Sede sede = entry.getValue();   //agarrar la sede de la entrada
+                jsonSede.put("Nombre", sede.getNombre());   
                 jsonSede.put("Direccion",sede.getDireccion());
-                JSONArray arregloMesas = new JSONArray();
+                JSONArray arregloMesas = new JSONArray();   //crear arreglomesas
                 for(Mesa mesa : sede.getMesas()){
-                    JSONObject jsonMesa = new JSONObject();
+                    JSONObject jsonMesa = new JSONObject();  //crear objeto mesa
                     jsonMesa.put("numero",mesa.getNumero());
-                    JSONArray arregloPersonas = new JSONArray();
-                    for (Persona persona : mesa.getPersonas()){
-                        JSONObject jsonPersona = new JSONObject();
+                    JSONArray arregloPersonas = new JSONArray();    //crear arreglopersonas
+                    for (Persona persona : mesa.getPersonas()){ //UTILIZACION DE CLASE ABSTRACTA EN CONTEXTO
+                        JSONObject jsonPersona = new JSONObject();  //crear objeto persona
                         jsonPersona.put("Nombre",persona.getNombres());
                         jsonPersona.put("Apellidos",persona.getApellidos());
                         jsonPersona.put("rut", persona.getRut());
                         jsonPersona.put("tipo",persona.getTipo());
                         jsonPersona.put("Direccion",persona.getDireccionString());
-                        arregloPersonas.put(jsonPersona);
+                        arregloPersonas.put(jsonPersona);   //colocar objeto persona en arregloPersonas
                     }
-                    arregloMesas.put(jsonMesa);
+                    jsonMesa.put("Personas",arregloPersonas); //colocar arregloPersona en objeto mesa
+                    arregloMesas.put(jsonMesa); //colocar objeto mesa en arregloMesa
                 }
-                arregloSedes.put(jsonSede);
+                jsonSede.put("Mesas",arregloMesas); //colocar arreglomesas en objeto sede
+                arregloSedes.put(jsonSede); //colocar objetoSede en arregloSede
             }
-            datos.put("Sedes",arregloSedes);
+            datos.put("Sedes",arregloSedes); //colocar arregloSedes en objeto datos
             //escritor.write(datos.toString());
             System.out.println(datos.toString());
             escritor.close();

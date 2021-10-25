@@ -12,7 +12,7 @@ import java.util.TreeMap;
 public class Sede implements Coordenable{
     private String nombre;
     private Direccion direccion;
-    private Map<Persona,String> votantesxrut;
+    private Map<String,Persona> votantesxrut;
     private List<Mesa> mesas;
     
     public Sede(){
@@ -42,13 +42,6 @@ public class Sede implements Coordenable{
         this.direccion = direccion;
     }
 
-    public Map<Persona, String> getPersonasxRut() {
-        return votantesxrut;
-    }
-
-    public void setPersonasxRut(Map<Persona, String> personasxRut) {
-        this.votantesxrut = personasxRut;
-    }
 
     public List<Mesa> getMesas() {
         return mesas;
@@ -69,11 +62,16 @@ public class Sede implements Coordenable{
     }
 
     public void agregarMesa(int numeroMesa) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(this.mesas.isEmpty()){
+            agregarMesa(new Mesa());
+        }
+        else{
+            this.mesas.add((new Mesa(numeroMesa)));
+        }
     }
 
     public void agregarMesa(Mesa mesa) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.mesas.add(mesa);
     }
 
     public String getNombre() {
@@ -84,17 +82,26 @@ public class Sede implements Coordenable{
         this.nombre = nombre;
     }
 
-    public Map<Persona, String> getVotantesxrut() {
+    public Map<String, Persona> getVotantesxrut() {
         return votantesxrut;
     }
 
-    public void setVotantesxrut(Map<Persona, String> votantesxrut) {
+    public void setVotantesxrut(Map<String, Persona> votantesxrut) {
         this.votantesxrut = votantesxrut;
     }
 
     @Override
     public String getDireccionString() {
         return this.direccion.getDireccionString();
+    }
+
+    public void agregarPersona(Persona persona) {
+        this.votantesxrut.put(persona.getRut(), persona);
+    }
+
+    @Override
+    public boolean isCoordenada() {
+        return this.getDireccion().isCoordenada();
     }
     
 }

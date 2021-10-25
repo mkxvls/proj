@@ -8,4 +8,5 @@ public interface Coordenable {
     public Double[] getCoords();
     public void setCoords();
     public String getDireccionString();
+    public boolean isCoordenada();
 }

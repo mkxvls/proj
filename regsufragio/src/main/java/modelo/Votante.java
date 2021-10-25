@@ -4,10 +4,9 @@ package modelo;
 public class Votante extends Persona {
 
     public Votante(String nombres, String apellidos, String rut, String direccion) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        super(nombres,apellidos,rut,direccion);
+    
     }
-    
-    
     
     @Override
     public String getTipo() {
@@ -22,6 +21,11 @@ public class Votante extends Persona {
     @Override
     public void setCoords() {
         this.getDireccion().setCoords();
+    }
+
+    @Override
+    public boolean isCoordenada() {
+        return this.getDireccion().isCoordenada();
     }
     
 }

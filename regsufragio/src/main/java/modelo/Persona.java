@@ -20,6 +20,10 @@ public abstract class Persona implements Coordenable {
     }
     
     public Persona(String nombre,String apellido,String rut,String direccion){
+        this.Nombres=nombre;
+        this.Apellidos=apellido;
+        this.rut=rut;
+        this.direccion = new Direccion(direccion);
         
     }
 
