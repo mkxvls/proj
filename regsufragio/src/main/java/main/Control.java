@@ -19,20 +19,23 @@ import org.json.*;
  */
 public class Control {
     
-    private Distrito distrito;
-    private Consola consola;
+    private Distrito distrito; //modelo
+    private Consola consola;    //vista
     
     public Control() throws IOException{
-        this.distrito = new Distrito();
-        this.consola = new Consola();
-        //cargar();
+        distrito = new Distrito();
+        consola = new Consola();
+        distrito.cargarPrueba();
+        
+        cargar();
+        distrito.coordenar();
         //run();
         guardar();
     }
    
     private void guardar() throws IOException{
         consola.display("GUARDAR");
-        try(BufferedWriter escritor = new BufferedWriter(new FileWriter("datosa.json"))){
+        try(BufferedWriter escritor = new BufferedWriter(new FileWriter("datos.json"))){
             JSONObject datos = new JSONObject(); //crear objeto datos
             JSONArray arregloSedes = new JSONArray(); //crear  arreglosedes
             for(Map.Entry<String,Sede> entry : this.distrito.getSedes().entrySet()){ 
@@ -73,6 +76,7 @@ public class Control {
     private void cargar() throws FileNotFoundException, IOException{
         consola.display("CARGAR");
         
+        
         try (BufferedReader lector = new BufferedReader(new FileReader("datos.json"))) {
             String linea = "";
             String datos = "";
@@ -91,6 +95,7 @@ public class Control {
                 //para cada sede en el arreglo hacer ...
                 JSONObject jSede = (JSONObject) oSede;
                 sede = new Sede(jSede.getString("Nombre"),jSede.getString("Direccion"));
+                this.distrito.agregarSede(sede);
                 JSONArray jarrMesas = jSede.getJSONArray("Mesas"); //agarrar el arreglo de mesas en la Sede
                 for(Object oMesa : jarrMesas){
                     // para cada mesa del arreglo hacer ...
@@ -102,14 +107,15 @@ public class Control {
                         JSONObject jPersona = (JSONObject) oPersona;
                         this.distrito.agregarPersona(   jPersona.getString("Nombre"),
                                                         jPersona.getString("Apellidos"),
-                                                        jPersona.getString("Direccion"),
                                                         jPersona.getString("rut"),
+                                                        jPersona.getString("Direccion"),
                                                         jPersona.getString("tipo"),
                                                         sede.getNombre() );
                     }
                 }
             }
-            this.distrito.agregarSede(sede);
+        }catch(Exception e){
+            consola.display("no se encuentra el archivo con los datos");
         }
     }
     private void run() throws IOException{

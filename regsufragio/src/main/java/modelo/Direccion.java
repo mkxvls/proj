@@ -59,7 +59,7 @@ public class Direccion implements Coordenable{
         JSONObject json = new JSONObject(input).getJSONArray("results").getJSONObject(0).getJSONObject("geometry").getJSONObject("location");
         this.lng = json.getDouble("lng");
         this.lat = json.getDouble("lat");
-        System.out.println(this.lat + "--" + this.lng + ":" + "ciudad:"+this.ciudad +"calle:"+this.calle +"numero:"+this.numero );
+//        System.out.println(this.lat + "--" + this.lng + ":" + "ciudad:"+this.ciudad +"calle:"+this.calle +"numero:"+this.numero );
         this.coordenada=true;
     }
     

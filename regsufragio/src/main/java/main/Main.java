@@ -14,7 +14,6 @@ import modelo.Distrito;
 public class Main {
     
     public static void main(String[] args) throws IOException{
-        System.out.println("hola mundo!");
         new Control(); 
     }   
     

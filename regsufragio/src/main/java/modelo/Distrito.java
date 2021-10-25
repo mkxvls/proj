@@ -21,8 +21,6 @@ public class Distrito {
         this.personasxRut= new TreeMap<>();
         this.personasxSede = new TreeMap<>();
         this.sedes = new TreeMap<>();
-        cargarPrueba();
-        coordenar();
     }
     
     
@@ -67,7 +65,7 @@ public class Distrito {
             this.sedes.get(sedeMasCerca).agregarPersona(persona);
             persona.setSede(sedeMasCerca);
             persona.setTieneSede(true);
-            System.out.println(persona.getNombres() + " asignado a " + sedeMasCerca);
+//            System.out.println(persona.getNombres() + " asignado a " + sedeMasCerca);
         }
     }
     
@@ -98,7 +96,7 @@ public class Distrito {
     }
 
     
-    private void cargarPrueba(){
+    public void cargarPrueba(){
         agregarSede(new Sede("PUCV","Brasil 2950,Valparaiso"));
         agregarSede(new Sede("LICEO JUANA ROSS DE EDWARDS","Argentina 871,Valparaiso"));
         agregarSede(new Sede("LICEO TECNOLOGICO VILLA ALEMANA","Valparaiso 133,Villa Alemana"));
@@ -176,6 +174,10 @@ public class Distrito {
 
     public void setSedes(Map<String, Sede> sedes) {
         this.sedes = sedes;
+    }
+
+    public void agregarSede(String input) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 
