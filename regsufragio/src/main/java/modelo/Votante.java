@@ -3,8 +3,8 @@ package modelo;
 
 public class Votante extends Persona {
 
-    public Votante(String nombres, String apellidos, String rut, String direccion) {
-        super(nombres,apellidos,rut,direccion);
+    public Votante(String nombres, String apellidos, String rut, String direccion,String partido) {
+        super(nombres,apellidos,rut,direccion,partido);
     
     }
     

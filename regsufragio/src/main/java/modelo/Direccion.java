@@ -12,6 +12,8 @@ import java.util.logging.Logger;
 import org.json.JSONObject;
 
 /**
+ *  Clase direccion
+ * se encarga de todo lo de una direccion, pasandole la direccion como string o parametros sueltos
  * * @author Maximiliano Valencia Saez
  */
 public class Direccion implements Coordenable{
@@ -27,6 +29,12 @@ public class Direccion implements Coordenable{
     private double lng; //longitud
     private boolean coordenada=false;
 
+    /**
+     *  constructor parametros sueltos
+     * @param numero numero de la calle
+     * @param calle nombre de la calle
+     * @param ciudad ciudad donde se ubica
+     */
     public Direccion(String numero,String calle,String ciudad) {
         this.numero = numero;
         this.calle = calle;
@@ -34,6 +42,10 @@ public class Direccion implements Coordenable{
     
     }
 
+    /**
+     *  contructor string CALLE NUMERO,CIUDAD
+     * @param direccionSede CALLE NUMERO,CIUDAD
+     */
     public Direccion(String direccionSede) {
         String[] tokens = tokenizarDireccion(direccionSede);
         this.numero=tokens[0];
@@ -44,7 +56,12 @@ public class Direccion implements Coordenable{
     public Direccion() {
     }
     
-    
+    /**
+     *  pide las coordenadas a la api geocoding de Google parsea el resultado
+     * y lo guarda en las variables privadas
+     * @throws MalformedURLException
+     * @throws IOException 
+     */
     private void fijarCoords() throws MalformedURLException, IOException{
         String urlquery = URLbase + this.getNumero()+"+"+this.getCalle() + "," + this.getCiudad() + keyAPI;
         URL url = new URL(urlquery.replaceAll("\\s","%"));
@@ -62,7 +79,14 @@ public class Direccion implements Coordenable{
 //        System.out.println(this.lat + "--" + this.lng + ":" + "ciudad:"+this.ciudad +"calle:"+this.calle +"numero:"+this.numero );
         this.coordenada=true;
     }
-    
+    /**
+     * tokeniza una direccion CALLE NUMERO,CIUDAD en un arreglo de strings donde
+     * [0] Numero
+     * [1] Calle
+     * [2] Ciudad
+     * @param string
+     * @return direccion arreglo de strings
+     */
     private String[] tokenizarDireccion(String string){
             String[] direccion = string.split(",");
             String tokenCiudad = direccion[1];
@@ -70,7 +94,11 @@ public class Direccion implements Coordenable{
             String tokenCalle = direccion[0].replaceAll(" "+tokenNumero,"");
           return new String[]{tokenNumero,tokenCalle,tokenCiudad};
     }
-    
+    /**
+     *  agarra los numeros al final de un string
+     * @param string string a recortar
+     * @return numeros al final de la string
+     */
     private static int getIntFromEnd (String string) {
         for (int a = string.length()-1; a >=0; a--)
             try {
@@ -82,7 +110,10 @@ public class Direccion implements Coordenable{
             }
         return -1;
     }
-
+    /**
+     *  obtiene la direccion como un string CALLE NUMERO,CIUDAD
+     * @return string
+     */
     public String getDireccionString(){
         return this.calle+" "+this.numero+","+this.ciudad;
     }

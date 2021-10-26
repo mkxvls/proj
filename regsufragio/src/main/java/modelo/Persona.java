@@ -17,18 +17,33 @@ public abstract class Persona implements Coordenable {
     private boolean tieneMesa = false;
     private String sede;
     private String mesa;
+    private String partido;
+    
     public Persona(){
         
     }
     
-    public Persona(String nombre,String apellido,String rut,String direccion){
+    /**
+     *  constructor persona abstracta
+     * @param nombre
+     * @param apellido
+     * @param rut
+     * @param direccion
+     * @param partido
+     */
+    public Persona(String nombre,String apellido,String rut,String direccion,String partido){
         this.Nombres=nombre;
         this.Apellidos=apellido;
         this.rut=rut;
+        this.partido=partido;
         this.direccion = new Direccion(direccion);
         
     }
 
+    @Override
+    public String toString(){   
+        return Nombres+","+Apellidos+","+rut+","+direccion.getDireccionString()+","+partido;
+    }
     
     public abstract String getTipo();
     
@@ -37,6 +52,12 @@ public abstract class Persona implements Coordenable {
         return this.direccion.getDireccionString();
     }
     
+    public String getPartido(){
+        return this.partido;
+    }
+    public void setPartido(String partido){
+        this.partido=partido;
+    }
     public String getRut() {
         return rut;
     }
@@ -83,6 +104,7 @@ public abstract class Persona implements Coordenable {
 
     public void setMesa(String mesa) {
         this.mesa = mesa;
+        this.tieneMesa=true;
     }
 
     public String getSede() {
@@ -91,6 +113,7 @@ public abstract class Persona implements Coordenable {
 
     public void setSede(String sede) {
         this.sede = sede;
+        this.tieneSede=true;
     }
 
     public boolean isTieneMesa() {
@@ -100,6 +123,5 @@ public abstract class Persona implements Coordenable {
     public void setTieneMesa(boolean tieneMesa) {
         this.tieneMesa = tieneMesa;
     }
-    
     
 }

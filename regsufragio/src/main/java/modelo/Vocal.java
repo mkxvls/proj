@@ -13,8 +13,8 @@ public class Vocal extends Persona {
         this.asistencia=false;
     }
 
-    public Vocal(String nombres, String apellidos, String rut, String direccion) {
-        super(nombres,apellidos,rut,direccion);
+    public Vocal(String nombres, String apellidos, String rut, String direccion,String partido) {
+        super(nombres,apellidos,rut,direccion,partido);
     }
 
     public boolean asistencia() {
@@ -24,7 +24,6 @@ public class Vocal extends Persona {
     public void setAsistencia(boolean asistencia) {
         this.asistencia = asistencia;
     }
-    
     
     @Override
     public String getTipo() {

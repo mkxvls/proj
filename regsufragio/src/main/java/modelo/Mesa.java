@@ -14,18 +14,27 @@ public class Mesa {
     private List<Apoderade> apoderades;
     private List<Persona> votantes;
     private boolean llena=false;
-    
+    /**
+     *  constructor vacio
+     */
     public Mesa(){
         this.vocales = new ArrayList<>();
         this.apoderades = new ArrayList<>();
         this.votantes = new ArrayList<>();
     }
-
+    /**
+    * constructor con paremetro numero mesa 
+    * @param numeroMesa int
+    */
     public Mesa(int numeroMesa) {
         this();
         this.numero=numeroMesa;
     }
 
+    /**
+     *  agrega la persona a la mesa
+     * @param persona
+     */
     public void agregarPersona(Persona persona){
        if ( !this.llena){
            this.votantes.add(persona);
@@ -72,11 +81,7 @@ public class Mesa {
     }
     
     public List<Persona> getPersonas(){
-        List<Persona> newList = new ArrayList<>();
-        newList.addAll(this.votantes);
-        newList.addAll(this.vocales);
-        newList.addAll(this.apoderades);
-        return newList;
+        return this.votantes;
     }
 
     public boolean isLlena() {
@@ -85,6 +90,18 @@ public class Mesa {
 
     public void setLlena(boolean llena) {
         this.llena = llena;
+    }
+
+    public String mostrarPersonas() {
+        String output= null;
+        int i=1;
+        output="Personas:\n";
+        for(Persona persona : this.votantes){
+            output=output+"\t"+i+".-"+" "+ persona.toString() + "\n";
+            i++;
+        }
+        
+        return output;
     }
     
 }

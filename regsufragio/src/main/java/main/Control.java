@@ -25,14 +25,54 @@ public class Control {
     public Control() throws IOException{
         distrito = new Distrito();
         consola = new Consola();
-        distrito.cargarPrueba();
-        
+       // distrito.cargarPrueba();
+       // distrito.coordenar();
         cargar();
-        distrito.coordenar();
+        consola.display(distrito.mostrarSedes());
+        consola.display(distrito.mostrarPersonasxSede());
+        consola.display(distrito.mostrarSedesMesasyPersonas());
         //run();
-        guardar();
+        //guardar();
     }
    
+    
+    private void run() throws IOException{
+        Opcion op;
+        boolean flag = true;
+        
+        String[] input;
+        while(flag){
+            input=null;
+            consola.setOutput("");
+            op = consola.menu();
+            input = consola.getInput();
+            
+            switch(op){
+                case AGREGARSEDE ->  distrito.agregarSede(input);
+//                case AGREGARMESA -> this.distrito.agregarMesa(input);
+                case AGREGARPERSONA -> distrito.agregarPersona(input);
+                case MOSTRARSEDES -> consola.display(distrito.mostrarSedes());
+                case MOSTRARSEDESYPERSONAS -> consola.display(distrito.mostrarPersonasxSede());
+                case MOSTRARSEDESMESASPERSONAS -> consola.display(distrito.mostrarSedesMesasyPersonas());
+//                case  EDITPERS -> 
+//                case EDITSEDE ->
+                //seleccionado por criterio
+                case SEDEMASPERS -> consola.display(distrito.getSedeMasPersonas());
+                case SEDEMENOSPERS -> consola.display(distrito.getSedeMenosPersonas());
+                case PERSONAMASLEJOS -> consola.display(distrito.getPersonaMasLejos());
+                //filtrado por criterio
+                case VOCCPART -> consola.display(distrito.getVocalesConPartidos());
+                case VOCSPART -> consola.display(distrito.getVocalesSinPartidos());
+                case APOCPART -> consola.display(distrito.getApoderadesConPartidos());
+                case APOSPART -> consola.display(distrito.getApoderadosSinPartidos());
+                case VOTMISMADIR -> consola.display(distrito.getVotantesMismaDir());
+                case SALIR -> flag = false;
+                default -> {
+                }
+                    
+            }
+        }  
+    }
     private void guardar() throws IOException{
         consola.display("GUARDAR");
         try(BufferedWriter escritor = new BufferedWriter(new FileWriter("datos.json"))){
@@ -52,13 +92,14 @@ public class Control {
                         //lenar persona
                         jsonPersona.put("Nombre",persona.getNombres());
                         jsonPersona.put("Apellidos",persona.getApellidos());
-                        jsonPersona.put("rut", persona.getRut());
-                        jsonPersona.put("tipo",persona.getTipo());
+                        jsonPersona.put("Rut", persona.getRut());
+                        jsonPersona.put("Tipo",persona.getTipo());
                         jsonPersona.put("Direccion",persona.getDireccionString());
+                        jsonPersona.put("Partido",persona.getPartido());
                         arregloPersonas.put(jsonPersona);   //colocar objeto persona en arregloPersonas
                     }
                     jsonMesa.put("Personas",arregloPersonas); //colocar arregloPersona en objeto mesa
-                    jsonMesa.put("numero",mesa.getNumero());
+                    jsonMesa.put("Numero",mesa.getNumero());
                     arregloMesas.put(jsonMesa); //colocar objeto mesa en arregloMesa
                 }
                 jsonSede.put("Mesas",arregloMesas); //colocar arreglomesas en objeto sede
@@ -68,11 +109,11 @@ public class Control {
             }
             datos.put("Sedes",arregloSedes); //colocar arregloSedes en objeto datos
             escritor.write(datos.toString());
-            System.out.println(datos.toString());
             escritor.close();
         }
         consola.display("GUARDADO");
     }
+    
     private void cargar() throws FileNotFoundException, IOException{
         consola.display("CARGAR");
         
@@ -89,8 +130,8 @@ public class Control {
             JSONObject job = new JSONObject(datos); //armar objeto json con datos leidos
             JSONArray jarr = job.getJSONArray("Sedes"); // agarrar el arreglo Sedes desde el objeto json
              
-            datos = "";
             Sede sede = null;
+            int i=1;
             for(Object oSede : jarr){
                 //para cada sede en el arreglo hacer ...
                 JSONObject jSede = (JSONObject) oSede;
@@ -100,17 +141,19 @@ public class Control {
                 for(Object oMesa : jarrMesas){
                     // para cada mesa del arreglo hacer ...
                     JSONObject jMesa = (JSONObject) oMesa;
-                    sede.agregarMesa(jMesa.getInt("numero"));
+                    sede.agregarMesa(jMesa.getInt("Numero"));
                     JSONArray jarrVotantes = jMesa.getJSONArray("Personas"); //agarrar el arreglo de personas en la mesa
                     for (Object oPersona : jarrVotantes){
                         // para cada persona del arreglo hacer ...
                         JSONObject jPersona = (JSONObject) oPersona;
+                        System.out.println(i++);
                         this.distrito.agregarPersona(   jPersona.getString("Nombre"),
                                                         jPersona.getString("Apellidos"),
-                                                        jPersona.getString("rut"),
+                                                        jPersona.getString("Rut"),
                                                         jPersona.getString("Direccion"),
-                                                        jPersona.getString("tipo"),
-                                                        sede.getNombre() );
+                                                        jPersona.getString("Tipo"),
+                                                        sede.getNombre(),
+                                                        jPersona.getString("Partido"));
                     }
                 }
             }
@@ -118,32 +161,4 @@ public class Control {
             consola.display("no se encuentra el archivo con los datos");
         }
     }
-    private void run() throws IOException{
-        Opcion op;
-        boolean flag = true;
-        
-        String input;
-        while(flag){
-            input="";
-            consola.setOutput("");
-            op = consola.menu();
-            input = consola.getInput();
-            /**
-            switch(op){
-                case AGREGARSEDE -> this.distrito.agregarSede(input);
-                case AGREGARMESA -> this.distrito.agregarMesa(input);
-                case AGREGARPERSONA -> this.distrito.agregarMesa(input);
-                case MOSTRARSEDES -> consola.setOutput(this.distrito.mostrarSedes());
-                case MOSTRARSEDESYPERSONAS -> consola.setOutput(this.distrito.mostrarSedesYPersonas());
-                case SALIR -> flag = false;
-                default -> {
-                }
-                    
-            }
-            **/
-        }  
-    }
-    
-    
-    
 }

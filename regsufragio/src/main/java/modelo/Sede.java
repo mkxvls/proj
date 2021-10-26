@@ -15,24 +15,21 @@ public class Sede implements Coordenable{
     private Map<String,Persona> votantesxrut;
     private List<Mesa> mesas;
     
-    public Sede(){
-        this.direccion = new Direccion();
-        this.votantesxrut = new TreeMap<>();
-        this.mesas = new ArrayList<>();
-    }
-    public Sede(Direccion direccion){
-        this.direccion = direccion;
-        this.votantesxrut = new TreeMap<>();
-        this.mesas = new ArrayList<>();
-        
-    }
-
+    /**
+     *  constructor unico 
+     * @param nombreSede
+     * @param direccionSede CALLE NUMERO,CIUDAD
+     */
     public Sede(String nombreSede, String direccionSede) {
         this.nombre = nombreSede;
         this.direccion = new Direccion(direccionSede);
         this.votantesxrut = new TreeMap<>();
         this.mesas = new ArrayList<>();
     }
+
+    /**
+     *  a las personas en la sede le asigna mesas 
+     */
     public void asignarMesas(){
         if(this.mesas.isEmpty()){
             agregarMesa();
@@ -79,13 +76,39 @@ public class Sede implements Coordenable{
 
     public void agregarMesa(int numeroMesa) {
         if(this.mesas.isEmpty()){
-            agregarMesa(new Mesa());
+            agregarMesa(new Mesa(1));
         }
         else{
             this.mesas.add((new Mesa(numeroMesa)));
         }
     }
 
+    /**
+     * arma un string con los datos de las personas en la sede
+     * @return
+     */
+    public String mostrarPersonas(){
+        String output=null;
+        output="Personas\n";
+        int i =1;
+        for(Map.Entry entry : this.votantesxrut.entrySet()){
+            output= output+ "\t" + i + ".-" + ((Persona) entry.getValue()).toString()+"\n";
+            i++;
+        }
+        return output;
+    }
+
+    
+    public String mostrarMesasYPersonas() {
+        String output=null;
+        output="Mesas:\n";
+        int i =1;
+        for(Mesa mesa : mesas){
+            output= output+ "\t" +"mesa nro:"+mesa.getNumero()+":"+mesa.mostrarPersonas()+"\n";
+            i++;
+        }
+        return output;
+    }
     public void agregarMesa(Mesa mesa) {
         this.mesas.add(mesa);
     }
@@ -113,11 +136,14 @@ public class Sede implements Coordenable{
 
     public void agregarPersona(Persona persona) {
         this.votantesxrut.put(persona.getRut(), persona);
+        persona.setSede(this.nombre);
+        asignarMesas();
     }
 
     @Override
     public boolean isCoordenada() {
         return this.getDireccion().isCoordenada();
     }
+
     
 }

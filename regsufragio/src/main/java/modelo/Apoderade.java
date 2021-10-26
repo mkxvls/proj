@@ -5,14 +5,23 @@ package modelo;
  * @author Maximiliano Valencia Saez
  */
 public class Apoderade extends Persona{
-    private String partido;
     
+    /**
+     *
+     */
     public Apoderade(){
-        this.partido="No especifica";
     }
 
-    public Apoderade(String nombres, String apellidos, String rut, String direccion) {
-        super(nombres,apellidos,rut,direccion);
+    /**
+     *  clase apoderade
+     * @param nombres
+     * @param apellidos
+     * @param rut
+     * @param direccion
+     * @param partido
+     */
+    public Apoderade(String nombres, String apellidos, String rut, String direccion,String partido) {
+        super(nombres,apellidos,rut,direccion,partido);
     }
     @Override
     public String getTipo() {
@@ -25,12 +34,6 @@ public class Apoderade extends Persona{
     @Override
     public void setCoords() {
         this.getDireccion().setCoords();
-    }
-    public String getPartido() {
-        return partido;
-    }
-    public void setPartido(String partido) {
-        this.partido = partido;
     }
 
     @Override

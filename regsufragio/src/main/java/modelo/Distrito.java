@@ -23,7 +23,10 @@ public class Distrito {
         this.sedes = new TreeMap<>();
     }
     
-    
+    /**
+     * Con los datos cargados, a los que cumplan la interfaz coordenable se realiza lo principal del programa
+     * asignar las personas a las sedes mas cercanas 
+     */
     public void coordenar() {
             List<Map.Entry> direcciones = new ArrayList<>();
             direcciones.addAll(this.personasxRut.entrySet());
@@ -42,12 +45,12 @@ public class Distrito {
                    asignarSede(persona);
                 }
             }
-            for(Map.Entry entry : this.sedes.entrySet()){
-                ((Sede) entry.getValue()).asignarMesas();
-            }
             
     }
-    
+    /**
+     *  A la persona se le asigna la sede existente mas cercana a la direccion de la persona
+     * @param persona 
+     */
     private void asignarSede(Persona persona){
         Double[] coordsPersona = persona.getCoords();
         double distancia=0.0;
@@ -64,8 +67,7 @@ public class Distrito {
         if(!sedeMasCerca.equals("")){
             this.sedes.get(sedeMasCerca).agregarPersona(persona);
             persona.setSede(sedeMasCerca);
-            persona.setTieneSede(true);
-//            System.out.println(persona.getNombres() + " asignado a " + sedeMasCerca);
+//          System.out.println(persona.getNombres() + " asignado a " + sedeMasCerca);
         }
     }
     
@@ -86,8 +88,8 @@ public class Distrito {
         final int R = 6371; // Radio de la tierra
         double latDistance = Math.toRadians(y[0] - x[0]);
         double lonDistance = Math.toRadians(y[1] - x[1]);
-        double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
-                + Math.cos(Math.toRadians(x[0])) * Math.cos(Math.toRadians(y[0]))
+        double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2) + 
+                Math.cos(Math.toRadians(x[0])) * Math.cos(Math.toRadians(y[0]))
                 * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         double distance = R * c * 1000; // convertir a metros
@@ -101,48 +103,224 @@ public class Distrito {
         agregarSede(new Sede("LICEO JUANA ROSS DE EDWARDS","Argentina 871,Valparaiso"));
         agregarSede(new Sede("LICEO TECNOLOGICO VILLA ALEMANA","Valparaiso 133,Villa Alemana"));
         
-        agregarPersona("Pedro Juan","Soto Perez","11.111.111-1","Condell 1546,Valparaiso",Persona.VOTANTE);
-        agregarPersona("Juan Pedro","Soto Perez","11.111.111-2","Condell 1546,Valparaiso",Persona.VOTANTE);
-        agregarPersona("cosme","fulanito","11.111.111-3","Labruyere 284,Valparaiso",Persona.VOTANTE);
-        agregarPersona("Felipe","Sanchez","11.111.111-4","Alba 107,Valparaiso",Persona.VOTANTE); // este falla hmmm
-        agregarPersona("Rachel","Sanchez","11.111.111-5","El Vergel 203,Valparaiso",Persona.VOTANTE);
-        agregarPersona("nombre1","apellido1","22.222.222-1","Valparaíso 298,Valparaíso",Persona.VOTANTE);
-        agregarPersona("nombre2","apellido2","22.222.222-2","Valparaíso 298,Valparaíso",Persona.VOTANTE);
-        agregarPersona("nombre3","apellido3","22.222.222-3","Pedro Montt 2585,Valparaíso",Persona.VOTANTE);
-        agregarPersona("nombre4","apellido4","11.222.333.-4","Mirador 110,Villa Alemana",Persona.VOTANTE);
+        agregarPersona("Pedro Juan","Soto Perez","11.111.111-1","Condell 1546,Valparaiso",Persona.VOTANTE,"00");
+        agregarPersona("Juan Pedro","Soto Perez","11.111.111-2","Condell 1546,Valparaiso",Persona.VOTANTE,"00");
+        agregarPersona("cosme","fulanito","11.111.111-3","Labruyere 284,Valparaiso",Persona.VOTANTE,"PC");
+        agregarPersona("Rachel","Sanchez","11.111.111-5","El Vergel 203,Valparaiso",Persona.VOTANTE,"PC");
+        agregarPersona("nombre1","apellido1","22.222.222-1","Valparaíso 298,Valparaíso",Persona.VOTANTE,"RN");
+        agregarPersona("nombre2","apellido2","22.222.222-2","Valparaíso 298,Valparaíso",Persona.VOTANTE,"RN");
+        agregarPersona("nombre3","apellido3","22.222.222-3","Pedro Montt 2585,Valparaíso",Persona.VOTANTE,"PPD");
+        agregarPersona("nombre4","apellido4","11.222.333.-4","Mirador 110,Villa Alemana",Persona.VOTANTE,"PPD");
         
     }
     
-    
+    /**
+     * arma un string con los datos de las sedes cargadas
+     * @return string datos a mostrar
+     */
+    public String mostrarSedes() {
+        String output=null;
+        output="SEDES\n";
+        int count=1;
+        for(Map.Entry entry : this.sedes.entrySet()){
+            Sede sede = (Sede) entry.getValue();
+            output=output + count + ".- "+ sede.getNombre()+" ; "+ sede.getDireccionString()+"\n";
+            count++;
+        }
+        
+        return output;
+    }
+    /**
+     * arma un string con los datos de las sedes y sus personas asignadas a estas
+     * @return 
+     */
+    public String mostrarPersonasxSede(){
+        String output = null;
+        output="Personas por sede \n";
+        int i=1;
+        for(Map.Entry entry : this.sedes.entrySet()){
+            Sede sede = (Sede) entry.getValue();
+            output=output + i + ".- "+ sede.getNombre()+" ; "+ sede.getDireccionString()+"\n";
+            output=output + sede.mostrarPersonas();
+            i++;
+        }
+        
+        return output;
+    }
+    /**
+     *  muestra las sedes , sus mesas y lsas personas por mesa
+     * @return 
+     */
+    public String mostrarSedesMesasyPersonas() {
+        String output=null;
+        int i = 1;
+        for(Map.Entry entry : this.sedes.entrySet()){
+            Sede sede = (Sede) entry.getValue();
+            output=output + i + ".- "+ sede.getNombre()+" ; "+ sede.getDireccionString()+"\n";
+            output=output + sede.mostrarMesasYPersonas();
+            i++;
+        }
+        
+        return output;
+    }
+
+    /**
+     * agrega la sede al distrito
+     * @param sede 
+     */
     public void agregarSede(Sede sede) {
         this.sedes.put(sede.getNombre(), sede);
     }
+    /**
+     * agrega la sede al distrito
+     * @param input arreglo donde [0] nombre sede
+     *                            [1] direccion sede
+     */
+    public void agregarSede(String[] input) {
+        agregarSede(new Sede(input[0],input[1]));
+    }
     
     //SOBREESCRITURA
-    public void agregarPersona(String nombres, String apellidos, String rut, String direccion, String tipo) {
+    /**
+     *  agrega persona al distrito
+     * @param nombres
+     * @param apellidos
+     * @param rut
+     * @param direccion
+     * @param tipo
+     * @param partido 
+     */
+    public void agregarPersona(String nombres, String apellidos, String rut, String direccion, String tipo,String partido) {
         switch(tipo){
-            case Persona.VOCAL -> this.personasxRut.put(rut,new Vocal(nombres,apellidos,rut,direccion));
-            case Persona.VOTANTE -> this.personasxRut.put(rut,new Votante(nombres,apellidos,rut,direccion));
-            case Persona.APODERADE -> this.personasxRut.put(rut,new Apoderade(nombres,apellidos,rut,direccion));
+            case Persona.VOCAL -> this.personasxRut.put(rut,new Vocal(nombres,apellidos,rut,direccion,partido));
+            case Persona.VOTANTE -> this.personasxRut.put(rut,new Votante(nombres,apellidos,rut,direccion,partido));
+            case Persona.APODERADE -> this.personasxRut.put(rut,new Apoderade(nombres,apellidos,rut,direccion,partido));
         }
     }
-
-    public void agregarPersona(String nombres, String apellidos, String rut, String direccion, String tipo, String nombreSede) {
-        agregarPersona(nombres,apellidos,rut,direccion,tipo);
+    /**
+     * agrega persona al distrito y a la sede de nombre nombreSede
+     * @param nombres
+     * @param apellidos
+     * @param rut
+     * @param direccion
+     * @param tipo
+     * @param nombreSede
+     * @param partido 
+     */
+    public void agregarPersona(String nombres, String apellidos, String rut, String direccion, String tipo, String nombreSede,String partido) {
+        agregarPersona(nombres,apellidos,rut,direccion,tipo,partido);
         switch(tipo){
             case Persona.VOCAL : 
-                Vocal vocal = new Vocal(nombres,apellidos,rut,direccion);
+                Vocal vocal = new Vocal(nombres,apellidos,rut,direccion,partido);
                 this.personasxSede.put(nombreSede, vocal);
                 this.sedes.get(nombreSede).agregarPersona(vocal);
             case Persona.VOTANTE :
-                Votante votante = new Votante(nombres,apellidos,rut,direccion);
+                Votante votante = new Votante(nombres,apellidos,rut,direccion,partido);
                 this.personasxSede.put(nombreSede,votante);
                 this.sedes.get(nombreSede).agregarPersona(votante);
             case Persona.APODERADE : 
-                Apoderade apoderade = new Apoderade(nombres,apellidos,rut,direccion);
+                Apoderade apoderade = new Apoderade(nombres,apellidos,rut,direccion,partido);
                 this.personasxSede.put(nombreSede, apoderade);
                 this.sedes.get(nombreSede).agregarPersona(apoderade);
         }
+    }
+    
+    /**
+     * agrega persona al distrito y a la sede
+     * @param input arreglo donde arr[nombres,apellidos,rut,direccion,tipo,partido]
+     */
+    public void agregarPersona(String[] input) {
+        agregarPersona(input[0],input[1],input[2],input[3],input[4],input[5]);
+    }
+    
+    /**
+     *
+     * @return
+     */
+    public String getSedeMasPersonas() {
+        String output=null;
+        int count=0;
+        String sedeMasPersonas="";
+        for(Map.Entry entry : this.sedes.entrySet()){
+            Sede sede = (Sede) entry.getValue();
+            int aux = sede.getVotantesxrut().size();
+            if(  aux > count  ){
+                sedeMasPersonas= sede.getNombre();
+                count=aux;
+                output= sede.getNombre()+" ; "+ sede.getDireccionString()+"\n";
+            }
+        }
+
+        return output;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getSedeMenosPersonas() {
+        String output=null;
+        int count=1000;
+        String sedeMenosPersonas="";
+        for(Map.Entry entry : this.sedes.entrySet()){
+            Sede sede = (Sede) entry.getValue();
+            int aux = sede.getVotantesxrut().size();
+            if(  aux < count  ){
+                sedeMenosPersonas= sede.getNombre();
+                count=aux;
+                output= sede.getNombre()+" ; "+ sede.getDireccionString()+"\n";
+            }
+        }
+
+        return output;
+    }
+
+    /**
+     *
+     * @return las personas mas lejos de su sede
+     */
+    public String getPersonaMasLejos() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getVocalesConPartidos() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getVocalesSinPartidos() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getApoderadesConPartidos() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getApoderadosSinPartidos() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getVotantesMismaDir() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     public String getNumero() {
@@ -175,10 +353,9 @@ public class Distrito {
     public void setSedes(Map<String, Sede> sedes) {
         this.sedes = sedes;
     }
+    
 
-    public void agregarSede(String input) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+
 
 
 }
