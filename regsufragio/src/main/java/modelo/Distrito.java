@@ -192,9 +192,15 @@ public class Distrito {
      */
     public void agregarPersona(String nombres, String apellidos, String rut, String direccion, String tipo,String partido) {
         switch(tipo){
-            case Persona.VOCAL -> this.personasxRut.put(rut,new Vocal(nombres,apellidos,rut,direccion,partido));
-            case Persona.VOTANTE -> this.personasxRut.put(rut,new Votante(nombres,apellidos,rut,direccion,partido));
-            case Persona.APODERADE -> this.personasxRut.put(rut,new Apoderade(nombres,apellidos,rut,direccion,partido));
+            case Persona.VOCAL :
+                this.personasxRut.put(rut,new Vocal(nombres,apellidos,rut,direccion,partido));
+                break;
+            case Persona.VOTANTE :
+                this.personasxRut.put(rut,new Votante(nombres,apellidos,rut,direccion,partido));
+                break;
+            case Persona.APODERADE :
+                this.personasxRut.put(rut,new Apoderade(nombres,apellidos,rut,direccion,partido));
+                break;
         }
     }
     /**
@@ -299,7 +305,7 @@ public class Distrito {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    /**
+   /**
      *
      * @return
      */

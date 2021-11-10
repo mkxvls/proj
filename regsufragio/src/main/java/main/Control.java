@@ -26,12 +26,12 @@ public class Control {
         distrito = new Distrito();
         consola = new Consola();
        // distrito.cargarPrueba();
-       // distrito.coordenar();
+        //distrito.coordenar();
         cargar();
         consola.display(distrito.mostrarSedes());
         consola.display(distrito.mostrarPersonasxSede());
         consola.display(distrito.mostrarSedesMesasyPersonas());
-        //run();
+        run();
         //guardar();
     }
    
@@ -48,28 +48,53 @@ public class Control {
             input = consola.getInput();
             
             switch(op){
-                case AGREGARSEDE ->  distrito.agregarSede(input);
+                case AGREGARSEDE :
+                    distrito.agregarSede(input);
+                    break;
 //                case AGREGARMESA -> this.distrito.agregarMesa(input);
-                case AGREGARPERSONA -> distrito.agregarPersona(input);
-                case MOSTRARSEDES -> consola.display(distrito.mostrarSedes());
-                case MOSTRARSEDESYPERSONAS -> consola.display(distrito.mostrarPersonasxSede());
-                case MOSTRARSEDESMESASPERSONAS -> consola.display(distrito.mostrarSedesMesasyPersonas());
+                case AGREGARPERSONA : 
+                    distrito.agregarPersona(input);
+                    break;
+                case MOSTRARSEDES : 
+                    consola.display(distrito.mostrarSedes());
+                    break;
+                case MOSTRARSEDESYPERSONAS : 
+                    consola.display(distrito.mostrarPersonasxSede());
+                    break;
+                case MOSTRARSEDESMESASPERSONAS :
+                    consola.display(distrito.mostrarSedesMesasyPersonas());
+                    break;
 //                case  EDITPERS -> 
 //                case EDITSEDE ->
                 //seleccionado por criterio
-                case SEDEMASPERS -> consola.display(distrito.getSedeMasPersonas());
-                case SEDEMENOSPERS -> consola.display(distrito.getSedeMenosPersonas());
-                case PERSONAMASLEJOS -> consola.display(distrito.getPersonaMasLejos());
+                case SEDEMASPERS : 
+                    consola.display(distrito.getSedeMasPersonas());
+                    break;
+                case SEDEMENOSPERS : 
+                    consola.display(distrito.getSedeMenosPersonas());
+                    break;
+                case PERSONAMASLEJOS : 
+                    consola.display(distrito.getPersonaMasLejos());
+                    break;
                 //filtrado por criterio
-                case VOCCPART -> consola.display(distrito.getVocalesConPartidos());
-                case VOCSPART -> consola.display(distrito.getVocalesSinPartidos());
-                case APOCPART -> consola.display(distrito.getApoderadesConPartidos());
-                case APOSPART -> consola.display(distrito.getApoderadosSinPartidos());
-                case VOTMISMADIR -> consola.display(distrito.getVotantesMismaDir());
-                case SALIR -> flag = false;
-                default -> {
-                }
-                    
+                case VOCCPART : 
+                    consola.display(distrito.getVocalesConPartidos());
+                    break;
+                case VOCSPART :
+                    consola.display(distrito.getVocalesSinPartidos());
+                    break;
+                case APOCPART : 
+                    consola.display(distrito.getApoderadesConPartidos());
+                    break;
+                case APOSPART :
+                    consola.display(distrito.getApoderadosSinPartidos());
+                    break;
+                case VOTMISMADIR : 
+                    consola.display(distrito.getVotantesMismaDir());
+                    break;
+                case SALIR : 
+                    flag = false;
+                    break;
             }
         }  
     }

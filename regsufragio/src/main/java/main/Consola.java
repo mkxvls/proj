@@ -206,9 +206,15 @@ public class Consola {
         armarInput(this.lector.readLine());
         System.out.println("tipo: 1.-Vocal 2.-Apoderade 3.-Votante normal");
         switch(lector.readLine()){
-            case "1" -> armarInput(Persona.VOCAL);
-            case "2" -> armarInput(Persona.APODERADE);
-            case "3" -> armarInput(Persona.VOTANTE);
+            case "1" : 
+                armarInput(Persona.VOCAL);
+                break;
+            case "2" : 
+                armarInput(Persona.APODERADE);
+                break;
+            case "3" : 
+                armarInput(Persona.VOTANTE);
+                break;
         }
         System.out.println("partido: sigla en mayusculas, si ninguno escriba \"00\",sin comillas");
         armarInput(lector.readLine());

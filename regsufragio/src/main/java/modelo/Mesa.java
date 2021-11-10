@@ -39,8 +39,12 @@ public class Mesa {
        if ( !this.llena){
            this.votantes.add(persona);
            switch(persona.getTipo()){
-               case Persona.APODERADE -> this.apoderades.add((Apoderade) persona);
-               case Persona.VOCAL -> this.vocales.add((Vocal) persona);
+               case Persona.APODERADE :
+                    this.apoderades.add((Apoderade) persona);
+                    break;
+               case Persona.VOCAL :
+                    this.vocales.add((Vocal) persona);
+                    break;
            }
        }
        if(this.votantes.size()>=CAPMAX){
