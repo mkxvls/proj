@@ -107,5 +107,49 @@ public class Mesa {
         
         return output;
     }
+
+    public String getApoderadosSinPartidos() {
+        String output=null;
+        int i = 1;
+        for(Persona persona : this.apoderades){
+            if( persona.getPartido() == Persona.SINPARTIDO){
+                output = output + "\t" + i + ".-" + persona.getNombres() + " " + persona.getApellidos() + " rut: " + persona.getRut() + "\n";
+            }   
+        }
+        return output;
+    }
+
+    public String getApoderadesConPartidos() {
+        String output=null;
+        int i = 1;
+        for(Persona persona : this.apoderades){
+            if( persona.getPartido() != Persona.SINPARTIDO){
+                output = output + "\t" + i + ".-" + persona.getNombres() + " " + persona.getApellidos() + " rut: " + persona.getRut() + "\n";
+            }   
+        }
+        return output;
+    }
+
+    public String getVocalesSinPartidos() {
+        String output=null;
+        int i = 1;
+        for(Persona persona : this.apoderades){
+            if( persona.getPartido() == Persona.SINPARTIDO){
+                output = output + "\t" + i + ".-" + persona.getNombres() + " " + persona.getApellidos() + " rut: " + persona.getRut() + "\n";
+            }   
+        }
+        return output;
+    }
+
+    public String getVocalesConPartidos() {
+        String output=null;
+        int i = 1;
+        for(Persona persona : this.apoderades){
+            if( persona.getPartido() != Persona.SINPARTIDO){
+                output = output + "\t" + i + ".-" + persona.getNombres() + " " + persona.getApellidos() + " rut: " + persona.getRut() + "\n";
+            }   
+        }
+        return output;
+    }
     
 }

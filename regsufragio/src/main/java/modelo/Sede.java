@@ -14,7 +14,7 @@ public class Sede implements Coordenable{
     private Direccion direccion;
     private Map<String,Persona> votantesxrut;
     private List<Mesa> mesas;
-    
+    private int cantidadPersonas;
     /**
      *  constructor unico 
      * @param nombreSede
@@ -25,6 +25,7 @@ public class Sede implements Coordenable{
         this.direccion = new Direccion(direccionSede);
         this.votantesxrut = new TreeMap<>();
         this.mesas = new ArrayList<>();
+        this.cantidadPersonas=0;
     }
 
     /**
@@ -138,11 +139,69 @@ public class Sede implements Coordenable{
         this.votantesxrut.put(persona.getRut(), persona);
         persona.setSede(this.nombre);
         asignarMesas();
+        this.cantidadPersonas++;
     }
 
     @Override
     public boolean isCoordenada() {
         return this.getDireccion().isCoordenada();
+    }
+
+    public int getCantidadPersonas() {
+        return cantidadPersonas;
+    }
+
+    public void setCantidadPersonas(int cantidadPersonas) {
+        this.cantidadPersonas = cantidadPersonas;
+    }
+
+    public Persona getPersonaMasLejos() {
+        double distancia = 0.0;
+        Persona masLejos= null;
+        for(Map.Entry entry : this.votantesxrut.entrySet()){
+            Persona persona = (Persona) entry.getValue();
+            if(distancia < persona.getDistanciaSede()){
+                distancia = persona.getDistanciaSede();
+                masLejos=persona;
+            }
+        }
+        return masLejos;
+    }
+
+    public String getVocalesConPartidos() {
+        String output = null;
+        for (Mesa mesa : this.mesas){
+            output=output + "mesa :" + mesa.getNumero() + "\n" + mesa.getVocalesConPartidos() + "\n";
+        }
+        return output;
+    }
+
+    public String getVocalesSinPartidos() {
+        String output = null;
+        for(Mesa mesa : this.mesas){
+            output=output + "mesa :" + mesa.getNumero() + "\n" + mesa.getVocalesSinPartidos() + "\n";
+        }
+        return output;
+    }
+
+    public String getApoderadesConPartidos() {
+        String output = null;
+        for(Mesa mesa : this.mesas){
+            output=output + "mesa :" + mesa.getNumero() + "\n" + mesa.getApoderadesConPartidos() + "\n";
+        }
+        return output;
+    }
+
+    public String getApoderadosSinPartidos() {
+        String output = null;
+        for(Mesa mesa : this.mesas){
+            output=output + "mesa :" + mesa.getNumero() + "\n" + mesa.getApoderadosSinPartidos() + "\n";
+        }
+        return output;
+    }
+
+    public String getVotantesMismaDir() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     

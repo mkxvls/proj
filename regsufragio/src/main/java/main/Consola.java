@@ -51,30 +51,45 @@ public class Consola {
                             case 2 : return Opcion.AGREGARMESA;
                             case 3 : return Opcion.AGREGARPERSONA;
                         }
-                break;
+                        break;
                 case"2":
                         switch(mostrar()){
                             case 1 : return Opcion.MOSTRARSEDES;
                             case 2 : return Opcion.MOSTRARSEDESYPERSONAS;
                             case 3 : return Opcion.MOSTRARSEDESMESASPERSONAS;
                         }
-                break;
+                        break;
                 case "3":
-                    switch(editar()){
+                        switch(editar()){
                             case 1 : return Opcion.EDITSEDE;
                             case 2 : return Opcion.EDITPERS;
                         }
-                break;
+                        break;
                 case "4":
-                break;
+                        switch(eliminar()){
+                        
+                        }
+                        break;
                 case "5":
-                break;
+                        switch(buscar()){
+                            
+                        }
+                        break;
                 case "6":
-                break;
+                        switch(reportar()){
+                    
+                        }
+                        break;
                 case "7":
-                break;
+                        switch(graficar()){
+                            
+                        }
+                        break;
                 case "8":
-                break;
+                        switch(ventana()){
+                            
+                        }
+                        break;
                 case "9": //selectxcriterio
                     switch(selectxcriterio()){
                         case 1: return Opcion.SEDEMASPERS;
@@ -245,8 +260,8 @@ public class Consola {
         System.out.println("3.- persona");
         String opcion = lector.readLine();
         switch(opcion){
-            case "1" : addSede();return 1;
-            case "2" : addMesa();return 2;
+            case "1" : addSede(); return 1;
+            case "2" : addMesa(); return 2;
             case "3" : addPersona(); return 3;
         }
         return -1;
@@ -275,4 +290,23 @@ public class Consola {
         System.out.println("manejo por consola\nIngrese con \"enter\"el numero de las opciones para seleccionar");
     }
 
+    private int ventana() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private int graficar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private int reportar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private int buscar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private int eliminar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

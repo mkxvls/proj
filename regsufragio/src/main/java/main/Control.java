@@ -24,13 +24,9 @@ public class Control {
     
     public Control() throws IOException{
         distrito = new Distrito();
-        consola = new Consola();
-       // distrito.cargarPrueba();
-        //distrito.coordenar();
         cargar();
-        consola.display(distrito.mostrarSedes());
-        consola.display(distrito.mostrarPersonasxSede());
-        consola.display(distrito.mostrarSedesMesasyPersonas());
+        distrito.coordenar();
+        consola = new Consola();
         run();
         //guardar();
     }
@@ -66,6 +62,7 @@ public class Control {
                     break;
 //                case  EDITPERS -> 
 //                case EDITSEDE ->
+                    
                 //seleccionado por criterio
                 case SEDEMASPERS : 
                     consola.display(distrito.getSedeMasPersonas());
@@ -76,6 +73,7 @@ public class Control {
                 case PERSONAMASLEJOS : 
                     consola.display(distrito.getPersonaMasLejos());
                     break;
+                    
                 //filtrado por criterio
                 case VOCCPART : 
                     consola.display(distrito.getVocalesConPartidos());
@@ -138,15 +136,11 @@ public class Control {
         }
         consola.display("GUARDADO");
     }
-    
     private void cargar() throws FileNotFoundException, IOException{
         consola.display("CARGAR");
-        
-        
         try (BufferedReader lector = new BufferedReader(new FileReader("datos.json"))) {
             String linea = "";
             String datos = "";
-            
             while( (linea = lector.readLine())!=null ){
                 datos=datos+linea;
             }
@@ -171,7 +165,6 @@ public class Control {
                     for (Object oPersona : jarrVotantes){
                         // para cada persona del arreglo hacer ...
                         JSONObject jPersona = (JSONObject) oPersona;
-                        System.out.println(i++);
                         this.distrito.agregarPersona(   jPersona.getString("Nombre"),
                                                         jPersona.getString("Apellidos"),
                                                         jPersona.getString("Rut"),

@@ -8,6 +8,7 @@ public abstract class Persona implements Coordenable {
     public static final String VOCAL = "Vocal";
     public static final String VOTANTE = "Votante";
     public static final String APODERADE = "Apoderade";
+    public static final String SINPARTIDO = "00";
     
     private String rut;
     private String Nombres;
@@ -18,6 +19,7 @@ public abstract class Persona implements Coordenable {
     private String sede;
     private String mesa;
     private String partido;
+    private double distanciaSede;
     
     public Persona(){
         
@@ -37,7 +39,7 @@ public abstract class Persona implements Coordenable {
         this.rut=rut;
         this.partido=partido;
         this.direccion = new Direccion(direccion);
-        
+        this.distanciaSede = 0.0;
     }
 
     @Override
@@ -123,5 +125,14 @@ public abstract class Persona implements Coordenable {
     public void setTieneMesa(boolean tieneMesa) {
         this.tieneMesa = tieneMesa;
     }
+
+    public double getDistanciaSede() {
+        return distanciaSede;
+    }
+
+    public void setDistanciaSede(double distanciaSede) {
+        this.distanciaSede = distanciaSede;
+    }
+    
     
 }

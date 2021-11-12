@@ -59,6 +59,7 @@ public class Distrito {
         for(Map.Entry entry : this.sedes.entrySet()){
             Double[] coordsSede = ((Coordenable) entry.getValue()).getCoords();
             distancia = distanciaCoords(coordsPersona,coordsSede);
+            persona.setDistanciaSede(distancia);
             if(distanciaMin > distancia){
                 distanciaMin = distancia;
                 sedeMasCerca = ((Sede) entry.getValue()).getNombre();
@@ -274,7 +275,7 @@ public class Distrito {
             if(  aux < count  ){
                 sedeMenosPersonas= sede.getNombre();
                 count=aux;
-                output= sede.getNombre()+" ; "+ sede.getDireccionString()+"\n";
+                output= sede.getNombre()+" ; " + sede.getDireccionString() + "que tiene " +sede.getCantidadPersonas() +" personas" +"\n";
             }
         }
 
@@ -286,49 +287,93 @@ public class Distrito {
      * @return las personas mas lejos de su sede
      */
     public String getPersonaMasLejos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String output = null;
+        double distancia = 0;
+        Persona persona = null;
+        for(Map.Entry entry : this.sedes.entrySet()){
+            Sede sede = (Sede) entry.getValue();
+            persona = sede.getPersonaMasLejos();
+            if(distancia < persona.getDistanciaSede() ){
+               distancia = persona.getDistanciaSede();
+               output= "La persona mas lejana a su sede es: \n"+
+                       persona.getNombres() + " " + persona.getApellidos() + ", RUT: " + persona.getRut() +
+                       ". Su sede es :" + sede.getNombre() + " ubicada en : "+ sede.getDireccionString();
+            }
+        }
+        return output;
     }
 
     /**
      *
-     * @return
+     * @return String output de los vocales con partidos
      */
     public String getVocalesConPartidos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String output=null;
+        
+        for(Map.Entry entry : this.sedes.entrySet()){
+            Sede sede = (Sede) entry.getValue();
+            output = output + "Sede :"+ sede.getNombre() + "\n" +  sede.getVocalesConPartidos();
+        }
+        
+        return output;
     }
 
     /**
      *
-     * @return
+     * @return String output de los vocales sin partidos
      */
     public String getVocalesSinPartidos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String output=null;
+        
+        for(Map.Entry entry : this.sedes.entrySet()){
+            Sede sede = (Sede) entry.getValue();
+            output = output + "Sede :"+ sede.getNombre() + "\n" +  sede.getVocalesSinPartidos();
+        }
+        return output;
     }
 
    /**
      *
-     * @return
+     * @return String output de los apoderados con partidos
      */
     public String getApoderadesConPartidos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String output=null;
+        
+        for(Map.Entry entry : this.sedes.entrySet()){
+            Sede sede = (Sede) entry.getValue();
+            output = output + "Sede :"+ sede.getNombre() + "\n" +  sede.getApoderadesConPartidos();
+        }
+        return output;
     }
 
     /**
      *
-     * @return
+     * @return String output de los apoderados sin partidos
      */
     public String getApoderadosSinPartidos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String output=null;
+        
+        for(Map.Entry entry : this.sedes.entrySet()){
+            Sede sede = (Sede) entry.getValue();
+            output = output + "Sede :"+ sede.getNombre() + "\n" +  sede.getApoderadosSinPartidos();
+        }
+        return output;
     }
 
     /**
      *
-     * @return
+     * @return Sting output de los votantes que posean la misma direccion
      */
     public String getVotantesMismaDir() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String output = null;
+        for(Map.Entry entry : this.sedes.entrySet()){
+            Sede sede = (Sede) entry.getValue();
+            output = output + sede.getVotantesMismaDir();
+        }
+        return output;
     }
     
+    //getters y setters
     public String getNumero() {
         return numero;
     }
@@ -360,8 +405,5 @@ public class Distrito {
         this.sedes = sedes;
     }
     
-
-
-
 
 }
