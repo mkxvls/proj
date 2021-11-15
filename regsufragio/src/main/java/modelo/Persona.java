@@ -11,7 +11,7 @@ public abstract class Persona implements Coordenable {
     public static final String SINPARTIDO = "00";
     
     private String rut;
-    private String Nombres;
+    private String nombres;
     private String Apellidos;
     private Direccion direccion;
     private boolean tieneSede = false;
@@ -34,7 +34,7 @@ public abstract class Persona implements Coordenable {
      * @param partido
      */
     public Persona(String nombre,String apellido,String rut,String direccion,String partido){
-        this.Nombres=nombre;
+        this.nombres=nombre;
         this.Apellidos=apellido;
         this.rut=rut;
         this.partido=partido;
@@ -44,7 +44,7 @@ public abstract class Persona implements Coordenable {
 
     @Override
     public String toString(){   
-        return Nombres+","+Apellidos+","+rut+","+direccion.getDireccionString()+","+partido;
+        return nombres+","+Apellidos+","+rut+","+direccion.getDireccionString()+","+partido;
     }
     
     public abstract String getTipo();
@@ -69,11 +69,11 @@ public abstract class Persona implements Coordenable {
     }
 
     public String getNombres() {
-        return Nombres;
+        return nombres;
     }
 
     public void setNombres(String Nombres) {
-        this.Nombres = Nombres;
+        this.nombres = Nombres;
     }
 
     public String getApellidos() {

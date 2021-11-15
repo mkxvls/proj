@@ -1,5 +1,6 @@
 package main;
 
+import gui.Ventana;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -21,9 +22,11 @@ public class Control {
     
     private Distrito distrito; //modelo
     private Consola consola;    //vista
+    private Ventana ventana;
     
     public Control() throws IOException{
         distrito = new Distrito();
+        ventana = new Ventana();
         cargar();
         distrito.coordenar();
         consola = new Consola();
@@ -40,6 +43,7 @@ public class Control {
         while(flag){
             input=null;
             consola.setOutput("");
+            
             op = consola.menu();
             input = consola.getInput();
             
@@ -62,7 +66,10 @@ public class Control {
                     break;
 //                case  EDITPERS -> 
 //                case EDITSEDE ->
-                    
+                
+                case REPORTAR : 
+                    reportar();
+                    break;
                 //seleccionado por criterio
                 case SEDEMASPERS : 
                     consola.display(distrito.getSedeMasPersonas());
@@ -178,5 +185,27 @@ public class Control {
         }catch(Exception e){
             consola.display("no se encuentra el archivo con los datos");
         }
+    }
+
+    private void reportar() throws IOException {
+        //genera reporte csv de los datos del programa
+        String out = "Nombres,apellidos,rut,direccion,Sede asignada,mesa\n";
+        try(BufferedWriter escritor = new BufferedWriter(new FileWriter("reporte.csv"))){
+            for(Map.Entry entry : this.distrito.getPersonasxRut().entrySet() ){
+                Persona persona = (Persona) entry.getValue();
+                out = out + 
+                    persona.getNombres()+","+
+                    persona.getApellidos()+","+
+                    persona.getRut()+","+
+                    persona.getDireccionString()+","+
+                    persona.getSede()+","+
+                    persona.getMesa()+"\n" ;
+            }
+            escritor.write(out);
+            consola.display("reporte generado con exito");
+        }catch(Exception e){
+            consola.display("no se pudo generar el reporte");
+        }
+        
     }
 }

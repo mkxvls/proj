@@ -56,7 +56,7 @@ public class Consola {
                         switch(mostrar()){
                             case 1 : return Opcion.MOSTRARSEDES;
                             case 2 : return Opcion.MOSTRARSEDESYPERSONAS;
-                            case 3 : return Opcion.MOSTRARSEDESMESASPERSONAS;
+                            case 3 : return Opcion.MOSTRARSEDESMESASPERSONAS; 
                         }
                         break;
                 case "3":
@@ -77,6 +77,7 @@ public class Consola {
                         break;
                 case "6":
                         switch(reportar()){
+                            case 1: return Opcion.REPORTAR;
                     
                         }
                         break;
@@ -299,7 +300,8 @@ public class Consola {
     }
 
     private int reportar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("*** REPORTAR ***");
+        return 1;
     }
 
     private int buscar() {

@@ -170,6 +170,11 @@ public class Direccion implements Coordenable{
         }
     }
 
+    /**
+     *
+     * @return
+     */
+    @Override
     public boolean isCoordenada() {
         return coordenada;
     }
@@ -177,7 +182,5 @@ public class Direccion implements Coordenable{
     public void setCoordenada(boolean coordenada) {
         this.coordenada = coordenada;
     }
-    
-    
     
 }

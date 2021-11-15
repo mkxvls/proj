@@ -24,7 +24,7 @@ public class Distrito {
     }
     
     /**
-     * Con los datos cargados, a los que cumplan la interfaz coordenable se realiza lo principal del programa
+     * Con los datos cargados, a los que cumplan la interfaz coordenable se realiza lo principal del programa 
      * asignar las personas a las sedes mas cercanas 
      */
     public void coordenar() {
@@ -403,7 +403,5 @@ public class Distrito {
 
     public void setSedes(Map<String, Sede> sedes) {
         this.sedes = sedes;
-    }
-    
-
+    }   
 }
