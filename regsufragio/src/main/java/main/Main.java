@@ -2,6 +2,7 @@
 package main;
 
 import java.io.IOException;
+import gui.Vista;
 
 /**
  *  Clase integradora
@@ -10,7 +11,9 @@ import java.io.IOException;
 public class Main {
     
     public static void main(String[] args) throws IOException{
-        new Control(); 
+        //new Control(); 
+        new Vista();
+        
     }   
     
 }

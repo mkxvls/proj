@@ -1,6 +1,6 @@
 package main;
 
-import gui.Ventana;
+import gui.Vista;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -22,11 +22,11 @@ public class Control {
     
     private Distrito distrito; //modelo
     private Consola consola;    //vista
-    private Ventana ventana;
+    private Vista ventana;
     
     public Control() throws IOException{
         distrito = new Distrito();
-        ventana = new Ventana();
+        ventana = new Vista();
         cargar();
         distrito.coordenar();
         consola = new Consola();
