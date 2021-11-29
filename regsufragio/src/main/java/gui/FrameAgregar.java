@@ -10,12 +10,40 @@ import javax.swing.JLabel;
  * @author max
  */
 public class FrameAgregar extends JFrame implements ActionListener{
+    ActionListener listenerPadre;
     public FrameAgregar(Vista v) {
         super("Agregar");
+        listenerPadre = (ActionListener) v;
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(400,400);
         this.setLayout(null);
         
+        panelPrincipal();
+        
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        switch(e.getActionCommand()){
+            case "Mesa":
+                panelMesa();
+                System.out.println("agregar Mesa");
+                break;
+            case "Sede":
+                panelSede();
+                System.out.println("agregar Sede");
+                break;
+            case "Persona":
+                panelPersona();
+                System.out.println("agregar Persona");
+                break;
+        }
+    }
+
+    private void panelPrincipal(){
+        this.getContentPane().removeAll();
         JLabel label1 = new JLabel("¿Que desea agregar?");
         label1.setBounds(100, 10, 200, 40);
         this.add(label1);
@@ -37,23 +65,42 @@ public class FrameAgregar extends JFrame implements ActionListener{
         bPersona.setActionCommand("Persona");
         bPersona.addActionListener(this);
         this.add(bPersona);
+    
+    }
+    private void panelSede(){
+        this.getContentPane().removeAll();
+        JLabel label1 = new JLabel("Agregar Sede");
+        label1.setBounds(100,10,200,40);
+        this.add(label1);
+        //meterle los componentes para que meta los datos de la sede
+        //Nombre, ubicacion(direccion(calle,numero,ciudad))
         
-        this.setLocationRelativeTo(null);
-        this.setVisible(true);
+        menuInferior();
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        switch(e.getActionCommand()){
-            case "Mesa":
-                System.out.println("agregar Mesa");
-                break;
-            case "Sede":
-                System.out.println("agregar Sede");
-                break;
-            case "Persona":
-                System.out.println("agregar Persona");
-                break;
-        }
+    private void panelMesa(){
+        
+        menuInferior();
+    }
+    private void panelPersona(){
+    
+        menuInferior();
+    }
+    
+    
+    private void menuInferior(){
+        //boton para volver, donde lo dejo?
+        JButton bVolver = new JButton("<-Volver");
+        //TODO BOUNDS
+        bVolver.setActionCommand("Volver");
+        bVolver.addActionListener(this.listenerPadre);
+        this.add(bVolver);
+        //boton confirmar
+        JButton bConfirmar = new JButton("Confirmar");
+        //TODO BOUNDS
+        bConfirmar.setActionCommand("Confirmar");
+        bConfirmar.addActionListener(this);
+        this.add(bConfirmar);
+
     }
 }

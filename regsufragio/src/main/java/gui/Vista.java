@@ -28,9 +28,10 @@ public class Vista implements ActionListener {
             case "Boton Listar":
                 System.out.println("chao");
                 break;
-            case "Volver agregar":
-                agregar.dispose();
+            case "Volver":
+                if(agregar.isDisplayable()) agregar.dispose();
                 menu.setVisible(true);
+                break;
                     
         }
     }
