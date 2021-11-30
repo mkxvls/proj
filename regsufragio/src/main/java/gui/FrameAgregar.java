@@ -34,15 +34,12 @@ public class FrameAgregar extends JFrame implements ActionListener,Gui{
         switch(e.getActionCommand()){
             case OP_MESA:
                 panelMesa();
-                System.out.println("agregar Mesa");
                 break;
             case OP_SEDE:
                 panelSede();
-                System.out.println("agregar Sede");
                 break;
             case OP_PERS:
                 panelPersona();
-                System.out.println("agregar Persona");
                 break;
         }
     }
@@ -115,10 +112,23 @@ public class FrameAgregar extends JFrame implements ActionListener,Gui{
     }
 
     private void menuInferior(PanelSede pSede) {
-        JButton bVolver = new JButton("Volver");
+        JButton bVolver = new JButton("<");
         bVolver.setActionCommand(OP_VOLVER);
         bVolver.addActionListener(this.listenerControl);
-        bVolver.setBounds(10, SIZE_Y + (-Y-H)*2  , H , H);
+        bVolver.setBounds(10, SIZE_Y - (Y+H)*2  , H+20 , H);
         pSede.add(bVolver);
+
+        JButton bConf = new JButton("OK");
+        bConf.setActionCommand(OP_ADDSEDE);
+        bConf.addActionListener(this.listenerControl);
+        bConf.setBounds(SIZE_X - (Y+H)*2 , SIZE_Y -(Y+H)*2  , H+30 , H);
+        pSede.add(bConf);
+
+    }
+
+    @Override
+    public String[] getFields() {
+        
+        return pSede.getFields();
     }
 }

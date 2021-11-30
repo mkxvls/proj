@@ -37,4 +37,9 @@ public class FrameMenu extends JFrame implements Gui{
     
     }
 
+    @Override
+    public String[] getFields() {
+        return null;
+    }
+
 }

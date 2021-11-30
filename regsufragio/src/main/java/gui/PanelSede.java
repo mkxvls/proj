@@ -65,7 +65,7 @@ public class PanelSede extends JPanel implements Gui {
     }
     
     public String[] getFields(){
-        return new String[] {tfNombre.getText(), tfCalle.getText()+" "+ tfNumero.getText() + ","+tfCiudad.getText() };
+        return new String[] {tfNombre.getText(),tfCalle.getText()+" "+tfNumero.getText()+ ","+tfCiudad.getText() };
     }
     
 }

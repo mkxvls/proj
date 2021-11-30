@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Map;
 import modelo.Distrito;
 import modelo.Persona;
@@ -49,7 +50,11 @@ public class Control implements ActionListener{
             case Vista.OP_VOLVER:
                 ventana.volver();
                 break;
-                    
+            case Vista.OP_ADDSEDE:
+                String[] a =  (ventana.getFields());
+                System.out.println( a[0] );
+                System.out.println(a[1]);
+                break;
         }
     }
 

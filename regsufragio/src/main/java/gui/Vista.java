@@ -58,5 +58,10 @@ public class Vista implements Gui  {
         menu();
         
     }
+    
+    @Override
+    public String[] getFields() {
+        return agregar.getFields();
+    }
 
 }
