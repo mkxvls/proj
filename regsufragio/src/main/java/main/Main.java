@@ -11,9 +11,8 @@ import gui.Vista;
 public class Main {
     
     public static void main(String[] args) throws IOException{
-        //new Control(); 
-        new Vista();
-        
+        Control control = new Control();
+        control.testing();
     }   
     
 }

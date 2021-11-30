@@ -86,11 +86,7 @@ public class Consola {
                             
                         }
                         break;
-                case "8":
-                        switch(ventana()){
-                            
-                        }
-                        break;
+                case "8":       return Opcion.VENTANA;
                 case "9": //selectxcriterio
                     switch(selectxcriterio()){
                         case 1: return Opcion.SEDEMASPERS;
@@ -289,10 +285,6 @@ public class Consola {
     }
     private void ayuda(){
         System.out.println("manejo por consola\nIngrese con \"enter\"el numero de las opciones para seleccionar");
-    }
-
-    private int ventana() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     private int graficar() {

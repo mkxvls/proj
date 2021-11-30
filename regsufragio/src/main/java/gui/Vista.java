@@ -8,36 +8,55 @@ import javax.swing.JFrame;
  *
  * @author Maximiliano Valencia Saez
  */
-public class Vista implements ActionListener {
+public class Vista implements Gui  {
+    
+    
     private FrameMenu menu;
     private FrameAgregar agregar;
-    public Vista(){
+    private JFrame listar;
+    
+    private ActionListener listener;
+    
+    
+    public Vista(ActionListener listener){
+        this.listener=listener;
         //menu = new FrameMenu(this);
-        agregar = new FrameAgregar(this);
+       // agregar = new FrameAgregar(listener);
         
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        switch(e.getActionCommand()){
-            case "Boton Agregar":
-                System.out.println("asd"); //DEBUG
-                menu.setVisible(false);
-                agregar = new FrameAgregar(this);
-                break;
-            case "Boton Listar":
-                System.out.println("chao");
-                break;
-            case "Volver":
-                if(agregar.isDisplayable()) agregar.dispose();
-                menu.setVisible(true);
-                break;
-                    
+    public void agregar() {
+        if(menu != null && menu.isDisplayable()){
+            menu.dispose();
         }
+        if(listar != null && listar.isDisplayable()){
+            listar.dispose();
+        }
+        agregar = new FrameAgregar(listener);
+        agregar.setVisible(true);
     }
 
-    private void agregar() {
+    public void listar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void menu() {
+        if(menu != null && menu.isDisplayable()){
+            menu.setVisible(true);
+        }
+        menu = new FrameMenu(listener);
+        menu.setVisible(true);
+    }
+
+    public void volver() {
+        if(agregar != null && agregar.isDisplayable()){
+            agregar.dispose();
+        }
+        if(listar != null && listar.isDisplayable()){
+            listar.dispose();
+        }
+        menu();
         
     }
-   
+
 }
