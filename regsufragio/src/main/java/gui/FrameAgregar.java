@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -14,13 +15,13 @@ public class FrameAgregar extends JFrame implements ActionListener,Gui{
 
     private ActionListener listenerControl;
     private PanelSede pSede;
-    
+    private PanelPersona pPersona;
     public FrameAgregar(ActionListener control) {
         super("Agregar");
         listenerControl = (ActionListener) control;
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(SIZE_X,SIZE_Y);
-        this.setResizable(false);
+        this.setResizable(true);
         this.setLayout(null);
         
         panelPrincipal();
@@ -84,51 +85,72 @@ public class FrameAgregar extends JFrame implements ActionListener,Gui{
         
         // this.getContentPane().revalidate();
         this.getContentPane().repaint();
+        this.pack();
     }
 
     private void panelMesa(){
         
-        menuInferior();
     }
     private void panelPersona(){
-    
-        menuInferior();
+        this.getContentPane().removeAll();
+        pPersona = new PanelPersona();
+        this.add(pPersona);
+        menuInferior(pPersona);
+        
+        pPersona.setVisible(true);
+        this.setContentPane(pPersona);
+        
+        this.getContentPane().repaint();
+        this.pack();
     }
-    
-    
-    private void menuInferior(){
-        //boton para volver, donde lo dejo?
-        JButton bVolver = new JButton("<-Volver");
-        //TODO BOUNDS   
-        bVolver.setActionCommand(OP_VOLVER);
-        bVolver.addActionListener(this.listenerControl);
-        this.add(bVolver);
-        //boton confirmar
-        JButton bConfirmar = new JButton("Confirmar");
-        //TODO BOUNDS
-        bConfirmar.setActionCommand(OP_CONF);
-        bConfirmar.addActionListener(this);
-        this.add(bConfirmar);
-    }
+   
 
     private void menuInferior(PanelSede pSede) {
+        Rectangle bounds = pSede.getBounds();
         JButton bVolver = new JButton("<");
         bVolver.setActionCommand(OP_VOLVER);
         bVolver.addActionListener(this.listenerControl);
-        bVolver.setBounds(10, SIZE_Y - (Y+H)*2  , H+20 , H);
+        bVolver.setBounds(10, bounds.height - 10-H  , H+20 , H);
         pSede.add(bVolver);
 
         JButton bConf = new JButton("OK");
         bConf.setActionCommand(OP_ADDSEDE);
         bConf.addActionListener(this.listenerControl);
-        bConf.setBounds(SIZE_X - (Y+H)*2 , SIZE_Y -(Y+H)*2  , H+30 , H);
+        bConf.setBounds( bounds.width - 10 -(H+30), bounds.height -10-H  , H+30 , H);
         pSede.add(bConf);
-
     }
 
-    @Override
-    public String[] getFields() {
+    public String[] getFields(String op) {
+        switch(op){
+            case Gui.OP_ADDSEDE : return pSede.getFields();
+            case Gui.OP_ADDPERS : return pPersona.getFields();
+        }
+        return null ;
+    }
+
+    private void menuInferior(PanelPersona pPersona) {
+        Rectangle bounds = pPersona.getBounds();
+        JButton bVolver = new JButton("<");
+        bVolver.setActionCommand(OP_VOLVER);
+        bVolver.addActionListener(this.listenerControl);
+        bVolver.setBounds(10, bounds.height - 10-H  , H+20 , H);
+        pPersona.add(bVolver);
         
-        return pSede.getFields();
+        JButton bConf = new JButton("OK");
+        bConf.setActionCommand(OP_ADDPERS);
+        bConf.addActionListener(this.listenerControl);
+        bConf.setBounds( bounds.width - 10 -(H+30), bounds.height -10-H  , H+30 , H);
+        pPersona.add(bConf);
+    }
+
+    public void clearFields(String op) {
+        switch(op){
+            case Gui.OP_ADDSEDE :
+                pSede.clearFields();
+                break;
+            case Gui.OP_ADDPERS :
+                pPersona.clearFields();
+                break;
+        }
     }
 }

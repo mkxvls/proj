@@ -1,12 +1,12 @@
 package main;
 
+import gui.Gui;
 import gui.Vista;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Map;
 import modelo.Distrito;
 import modelo.Persona;
@@ -41,19 +41,31 @@ public class Control implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         switch(e.getActionCommand()){
-            case Vista.OP_AGREGAR:
+            case Gui.OP_AGREGAR:
                 ventana.agregar();
                 break;
-            case Vista.OP_LISTAR:
+            case Gui.OP_LISTAR:
                 ventana.listar();
                 break;
-            case Vista.OP_VOLVER:
+            case Gui.OP_VOLVER:
                 ventana.volver();
                 break;
-            case Vista.OP_ADDSEDE:
-                String[] a =  (ventana.getFields());
+            case Gui.OP_ADDSEDE:
+                String[] a =  (ventana.getFields(Gui.OP_ADDSEDE));
                 System.out.println( a[0] );
                 System.out.println(a[1]);
+                
+                ventana.clearFields(Gui.OP_ADDSEDE);
+                break;
+            case Gui.OP_ADDPERS:
+                String[] b =  (ventana.getFields(Gui.OP_ADDPERS));
+                System.out.println( b[0] );
+                System.out.println(b[1]);
+                System.out.println(b[2]);
+                System.out.println(b[3]);
+                System.out.println(b[4]);
+                
+                ventana.clearFields(Gui.OP_ADDPERS);
                 break;
         }
     }

@@ -1,4 +1,4 @@
-package gui;
+package gui;  
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,7 +8,7 @@ import javax.swing.JFrame;
  *
  * @author Maximiliano Valencia Saez
  */
-public class Vista implements Gui  {
+public class Vista {
     
     
     private FrameMenu menu;
@@ -59,9 +59,15 @@ public class Vista implements Gui  {
         
     }
     
-    @Override
-    public String[] getFields() {
-        return agregar.getFields();
+    
+    public String[] getFields(String op) {
+        return agregar.getFields(op);
+    }
+
+    
+    public void clearFields(String op) {
+        agregar.clearFields(op);
+        return;
     }
 
 }
