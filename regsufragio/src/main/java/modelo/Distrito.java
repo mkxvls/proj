@@ -131,6 +131,23 @@ public class Distrito {
         
         return output;
     }
+    public List mostrarSedesGui(){
+        List output= new ArrayList<String[]>();
+        for(Map.Entry entry : this.sedes.entrySet()){
+            Sede sede = (Sede) entry.getValue();
+            output.add(new String[]{sede.getNombre(),sede.getDireccionString()});
+        }
+        return output;
+    }
+    public List mostrarDatosSedeGui(String idx){
+        List output = new ArrayList<String[]>();
+        List aux = new ArrayList<>( sedes.values() );
+        Sede sede = (Sede) aux.get(Integer.parseInt(idx)-1);
+        for(Persona pers : sede.getVotantesxrut().values()){
+            output.add(new String[]{pers.getNombres(),pers.getApellidos(),pers.getRut(),pers.getDireccionString(),pers.getPartido()});
+        }
+        return output;
+    }
     /**
      * arma un string con los datos de las sedes y sus personas asignadas a estas
      * @return 

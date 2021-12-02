@@ -5,7 +5,8 @@ package gui;
  * @author Maximiliano Valencia Saez
  */
 public interface Gui {
-
+    public static final String OP_VER = "Ver";
+    public static final String OP_SALIR = "Salir";
     public static final String OP_AGREGAR = "Agregar";
     public static final String OP_CONF = "Confirmar";
     public static final String OP_LISTAR = "Listar";

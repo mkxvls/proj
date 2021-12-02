@@ -20,7 +20,7 @@ public class FrameAgregar extends JFrame implements ActionListener,Gui{
         super("Agregar");
         listenerControl = (ActionListener) control;
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(SIZE_X,SIZE_Y);
+        this.setSize(SIZE_X/2+50,SIZE_Y/2+50);
         this.setResizable(true);
         this.setLayout(null);
         
