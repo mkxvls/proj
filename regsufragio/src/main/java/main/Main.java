@@ -10,9 +10,9 @@ import gui.Vista;
  */
 public class Main {
     
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args) throws IOException, RutException, PersonaDuplicadaException{
         Control control = new Control();
-        control.testing();
+        control.normal();
     }   
     
 }

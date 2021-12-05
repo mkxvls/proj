@@ -54,17 +54,20 @@ public class FrameAgregar extends JFrame implements ActionListener,Gui{
         label1.setBounds(X, 10 + Y + ( (pad+H) * 0)  ,L*2,H);
         this.add(label1);
         
+        /*
         JButton bMesa = new JButton("Mesa");
         bMesa.setBounds(X,  Y + ((pad+H)* 1) ,L+25,H);
         bMesa.setActionCommand(OP_MESA);
         bMesa.addActionListener(this);
         this.add(bMesa);
+        */
         
         JButton bSede = new JButton("Sede");
         bSede.setBounds(X,  Y + ((pad+H) * 2) ,L+25,H);
         bSede.setActionCommand(OP_SEDE);
         bSede.addActionListener(this);
-        this.add(bSede);
+        this.add(bSede); 
+        
         
         JButton bPersona = new JButton("Persona");
         bPersona.setBounds(X, Y + ((pad+H) * 3) ,L+25,H);

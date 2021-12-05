@@ -213,6 +213,7 @@ public class Consola {
         System.out.println("Apellidos");
         armarInput(this.lector.readLine());
         System.out.println("Rut formato 12.345.678-9");
+        
         armarInput(this.lector.readLine());
         System.out.println("Direccion, de forma \\CALLE NUMERO,CIUDAD\\  ");
         armarInput(this.lector.readLine());

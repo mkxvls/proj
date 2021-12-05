@@ -421,4 +421,9 @@ public class Distrito {
     public void setSedes(Map<String, Sede> sedes) {
         this.sedes = sedes;
     }   
+
+    public boolean checkPersona(String rut) {
+    
+        return personasxRut.containsKey(rut);
+    }
 }

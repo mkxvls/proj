@@ -4,13 +4,9 @@ import gui.Gui;
 import gui.Vista;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Map;
 import modelo.Distrito;
-import modelo.Persona;
 
 /**
  *  control de la aplicacion
@@ -32,13 +28,13 @@ public class Control implements ActionListener{
         ventana.listar(distrito.mostrarSedesGui());
     }
    
-    public void normal() throws IOException{
+    public void normal() throws IOException, RutException, PersonaDuplicadaException{
         distrito = new Distrito();
         consola = new Consola();
         ControlArchivos.cargar(this.distrito);
         distrito.coordenar();
         run();
-       //ControlArchivos.guardar(this.distrito);
+        ControlArchivos.guardar(this.distrito);
     }
     
     @Override
@@ -62,23 +58,27 @@ public class Control implements ActionListener{
                 ventana.volver();
                 break;
             case Gui.OP_ADDSEDE:
-                String[] a =  (ventana.getFields(Gui.OP_ADDSEDE));
+                distrito.agregarSede(ventana.getFields(Gui.OP_ADDSEDE));
+                distrito.coordenar();
                 ventana.clearFields(Gui.OP_ADDSEDE);
                 break;
             case Gui.OP_ADDPERS:
-                String[] b =  (ventana.getFields(Gui.OP_ADDPERS));
+                distrito.agregarPersona(ventana.getFields(Gui.OP_ADDPERS));
+                distrito.coordenar();
                 ventana.clearFields(Gui.OP_ADDPERS);
                 break;
         }
     }
 
     
-    private void run() throws IOException{
+    private void run() throws IOException, RutException, PersonaDuplicadaException{
         Opcion op;
         boolean flag = true;
         
         String[] input;
         while(flag){
+            
+            distrito.coordenar();
             input=null;
             consola.setOutput("");
             
@@ -91,7 +91,22 @@ public class Control implements ActionListener{
                     break;
 //                case AGREGARMESA -> this.distrito.agregarMesa(input);
                 case AGREGARPERSONA : 
-                    distrito.agregarPersona(input);
+                    try{
+                        if(!checkRut(input)){
+                            throw new RutException("rut erroneo");
+                        }
+                        try{
+                            if(checkPersona(input)){
+                                throw new PersonaDuplicadaException("persona ya existe con ese rut");
+                            }
+                            distrito.agregarPersona(input);
+                            distrito.coordenar();
+                        }catch(PersonaDuplicadaException ex){
+                            consola.display(ex.getMessage());
+                        }
+                    }catch(RutException ex){
+                       consola.display(ex.getMessage());
+                    }
                     break;
                 case MOSTRARSEDES : 
                     consola.display(distrito.mostrarSedes());
@@ -147,25 +162,15 @@ public class Control implements ActionListener{
     }
     
     private void reportar() throws IOException {
-        //genera reporte csv de los datos del programa
-        String out = "Nombres,apellidos,rut,direccion,Sede asignada,mesa\n";
-        try(BufferedWriter escritor = new BufferedWriter(new FileWriter("reporte.csv"))){
-            for(Map.Entry entry : this.distrito.getPersonasxRut().entrySet() ){
-                Persona persona = (Persona) entry.getValue();
-                out = out + 
-                    persona.getNombres()+","+
-                    persona.getApellidos()+","+
-                    persona.getRut()+","+
-                    persona.getDireccionString()+","+
-                    persona.getSede()+","+
-                    persona.getMesa()+"\n" ;
-            }
-            escritor.write(out);
-            consola.display("reporte generado con exito");
-        }catch(Exception e){
-            consola.display("no se pudo generar el reporte");
-        }
-        
+        ControlArchivos.reportar(this.distrito);
     }
 
+    public  boolean checkRut(String[] input) {
+        String regex="^(\\d{2}\\.\\d{3}\\.\\d{3}-)([a-zA-Z]{1}$|\\d{1}$)";
+        return input[2].matches(regex);
+    }
+
+    public boolean checkPersona(String[] input) {
+        return distrito.checkPersona(input[2]);
+    }
 }

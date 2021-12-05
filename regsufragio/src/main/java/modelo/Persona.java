@@ -9,6 +9,10 @@ public abstract class Persona implements Coordenable {
     public static final String VOTANTE = "Votante";
     public static final String APODERADE = "Apoderade";
     public static final String SINPARTIDO = "00";
+
+    public static boolean checkRut(String[] input) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
     private String rut;
     private String nombres;

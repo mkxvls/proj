@@ -102,4 +102,25 @@ public class ControlArchivos {
             
         }
     }
+    public static void reportar(Distrito distrito){
+        //genera reporte csv de los datos del programa
+        String out = "Nombres,apellidos,rut,direccion,Sede asignada,mesa\n";
+        try(BufferedWriter escritor = new BufferedWriter(new FileWriter("reporte.csv"))){
+            for(Map.Entry entry : distrito.getPersonasxRut().entrySet() ){
+                Persona persona = (Persona) entry.getValue();
+                out = out + 
+                    persona.getNombres()+","+
+                    persona.getApellidos()+","+
+                    persona.getRut()+","+
+                    persona.getDireccionString()+","+
+                    persona.getSede()+","+
+                    persona.getMesa()+"\n" ;
+            }
+            escritor.write(out);
+            System.out.println("reporte generado con exito");
+        }catch(Exception e){
+            System.out.println("no se pudo generar el reporte");
+        }
+        
+    }
 }
